@@ -1,0 +1,4 @@
+mixin field(labelName, fieldName, fieldValue, fieldType='text', required=true)
+    div
+        label(for=fieldName)= labelName
+        input(type=fieldType name=fieldName value=fieldValue required)

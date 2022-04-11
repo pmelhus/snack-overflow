@@ -11,6 +11,7 @@ const usersRouter = require('./routes/users');
 const sessionSecret = require('./config/index')
 
 const app = express();
+
 //test please delete this
 // view engine setup
 app.set('view engine', 'pug');

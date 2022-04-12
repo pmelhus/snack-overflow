@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check } = require("express-validator");
+const { loginUser } = require('../auth');
 const { asyncHandler, handleValidationErrors } = require("../utils");
 const validateUsername =
   check("username")

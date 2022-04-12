@@ -1,4 +1,11 @@
-mixin field(labelName, fieldName, fieldValue, fieldType='text', required=true)
+mixin field(labelName, fieldName, fieldValue, fieldType)
     div
         label(for=fieldName)= labelName
-        input(type=fieldType name=fieldName value=fieldValue required)
+        input(type=fieldType name=fieldName value=fieldValue)
+
+mixin validationErrorSummary(errors)
+    if errors
+        p The following error(s) have occurred
+        ul
+            each error in errors
+                li= error

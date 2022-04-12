@@ -73,31 +73,6 @@ const userValidators = [
     })
 ];
 
-const validateUsername =
-  check("username")
-    .exists({ checkFalsy: true })
-    .withMessage("Please provide a username");
-
-const validateEmailAndPassword = [
-  check("email")
-    .exists({ checkFalsy: true })
-    .isEmail()
-    .withMessage("Please provide a valid email."),
-  check("password")
-    .exists({ checkFalsy: true })
-    .withMessage("Please provide a password."),
-];
-
-router.post("/", validateUsername, validateEmailAndPassword, handleValidationErrors, asyncHandler(async (req, res) => {
-    // TODO: User creation logic
-  })
-);
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.get('/signup', csrfProtection, asyncHandler(async (req, res) => {
   const user = await User.build()
   res.render('user-signup', {
@@ -107,7 +82,7 @@ router.get('/signup', csrfProtection, asyncHandler(async (req, res) => {
   })
 }))
 
-router.post('/signup', userValidators, asyncHandler(async(req, res, next) => {
+router.post('/signup', userValidators, csrfProtection, asyncHandler(async(req, res, next) => {
   const {firstName, lastName, userName, email, password, confirmPassword} = req.body;
   const user = User.build({firstName, lastName, userName, email})
   const validationErrors = validationResult(req)
@@ -130,6 +105,17 @@ router.post('/signup', userValidators, asyncHandler(async(req, res, next) => {
       errors
     })
   }
+
+}))
+
+router.get('/login', csrfProtection, asyncHandler (async (req, res) =>{
+  res.render('user-login', {
+    title: 'Login',
+    csrfToken: req.csrfToken()
+  })
+}))
+
+router.post('/login', loginUser, csrfProtection, asyncHandler (async (req, res) => {
 
 }))
 

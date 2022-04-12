@@ -13,4 +13,5 @@ block content
         +field('Password', 'password', user.password, 'password')
         +field('Confirm Password', 'confirmPassword', user.confirmPassword, 'password')
         button Sign Up!
-        button(href='/') Cancel
+        button: a(href='/') Cancel
+        a(href='/users/login') Already a member?

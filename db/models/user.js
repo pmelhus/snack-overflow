@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     profilePicture: DataTypes.TEXT
   }, {});
   User.associate = function(models) {
-    User.hasMany(models.Question, {foreignKey: "questionId"})
+    User.hasMany(models.Question, {foreignKey: "userId"})
     User.hasMany(models.Answer, {foreignKey: "answerId"})
     User.hasMany(models.AnswerVote, {foreignKey: "userId"})
   };

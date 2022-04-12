@@ -22,7 +22,6 @@ module.exports = {
         type: Sequelize.STRING(20)
       },
       userScore: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       email: {

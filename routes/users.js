@@ -6,6 +6,7 @@ const { User } = require('../db/models')
 const { asyncHandler, handleValidationErrors } = require("../utils");
 const { loginUser, logoutUser } = require('../auth')
 const csrfProtection = csrf({cookie: true})
+const bcrypt = require('bcryptjs')
 
 const userValidators = [
   check('firstName')
@@ -77,10 +78,13 @@ router.get('/signup', csrfProtection, asyncHandler(async (req, res) => {
   })
 }))
 
-router.post('/signup', userValidators, handleValidationErrors, asyncHandler(async(req, res) => {
-  const {firstName, lastName, email, password, confirmPassword} = req.body;
-  const user = User.build({firstName, lastName, email})
+router.post('/signup', asyncHandler(async(req, res) => {
+  const {firstName, lastName, userName, email, password, confirmPassword} = req.body;
+  const user = User.build({firstName, lastName, userName, email})
+
   if (user){
+    const hashedPassword = await bcrypt.hash(password, 10)
+    user.hashedPassword = hashedPassword;
     await user.save()
     return res.redirect('/')
   } else {

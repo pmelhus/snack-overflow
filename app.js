@@ -11,7 +11,8 @@ const usersRouter = require('./routes/users');
 const sessionSecret = require('./config/index')
 const { restoreUser } = require('./auth');
 const app = express();
-const questionsRouter = require("./routes/questions")
+const questionsRouter = require('./routes/answers')
+const answerRouter = require('./routes/answers')
 
 //test please delete this
 // view engine setup
@@ -41,6 +42,7 @@ store.sync();
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 app.use('/questions', questionsRouter);
+app.use('/answers', answerRouter)
 app.use(restoreUser);
 
 // catch 404 and forward to error handler

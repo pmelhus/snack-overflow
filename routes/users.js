@@ -79,7 +79,7 @@ router.get('/signup', csrfProtection, asyncHandler(async (req, res) => {
 
 router.post('/signup', userValidators, handleValidationErrors, asyncHandler(async(req, res) => {
   const {firstName, lastName, email, password, confirmPassword} = req.body;
-  const user = User.build({firstName, lastName, email, password, confirmPassword})
+  const user = User.build({firstName, lastName, email})
   if (user){
     await user.save()
     return res.redirect('/')

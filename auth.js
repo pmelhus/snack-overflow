@@ -1,4 +1,3 @@
-
 const loginUser = (req, res, user) => {
     req.session.auth = {
       userId: user.id,
@@ -9,8 +8,6 @@ const loginUser = (req, res, user) => {
   };
 
   const restoreUser = async (req, res, next) => {
-
-
     if (req.session.auth) {
       const { userId } = req.session.auth;
 

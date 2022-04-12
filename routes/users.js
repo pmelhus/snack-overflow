@@ -109,14 +109,57 @@ router.post('/signup', userValidators, csrfProtection, asyncHandler(async(req, r
 }))
 
 router.get('/login', csrfProtection, asyncHandler (async (req, res) =>{
+
   res.render('user-login', {
     title: 'Login',
     csrfToken: req.csrfToken()
   })
 }))
 
-router.post('/login', loginUser, csrfProtection, asyncHandler (async (req, res) => {
+const loginValidators = [
+  check('userName')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for username'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for password'),
+];
 
-}))
+router.post(
+  "/login",
+  csrfProtection,
+  loginValidators,
+  asyncHandler(async (req, res, next) => {
+    const { userName, password } = req.body;
+
+    const validatorErrors = validationResult(req);
+    const errors = [];
+
+    if (validatorErrors.isEmpty()) {
+      const user = await User.findOne({ where: { userName } });
+      if (user !== null) {
+        const passwordMatch = await bcrypt.compare(
+          password,
+          user.hashedPassword.toString()
+        );
+
+        if (passwordMatch) {
+          return res.redirect("/");
+        }
+      }
+      errors.push("Login failed for the provided username and password");
+    } else {
+      errors = validatorErrors.array().map((error) => error.msg);
+    }
+
+
+    res.render("user-login", {
+      title: "Login",
+      userName,
+      errors,
+      csrfToken: req.csrfToken(),
+    });
+  })
+);
 
 module.exports = router;

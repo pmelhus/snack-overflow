@@ -6,10 +6,6 @@ const { User } = require('../db/models')
 const { asyncHandler, handleValidationErrors } = require("../utils");
 const { loginUser, logoutUser } = require('../auth')
 const csrfProtection = csrf({cookie: true})
-const sessionSecret = require('../config/index')
-const cookieParser = require('cookie-parser')
-
-router.use(cookieParser(sessionSecret))
 
 const userValidators = [
   check('firstName')
@@ -72,7 +68,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/signup', userValidators, handleValidationErrors, csrfProtection, asyncHandler(async (req, res) => {
+router.get('/signup', csrfProtection, asyncHandler(async (req, res) => {
   const user = await User.build()
   res.render('user-signup', {
     title: 'Signup Form',

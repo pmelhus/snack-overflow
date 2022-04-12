@@ -18,10 +18,10 @@ module.exports = {
         type: Sequelize.TEXT
       },
       answerScore: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
       userId: {
+        allowNull:false,
         type: Sequelize.INTEGER,
         references: {model: "Users"}
       },

@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Question = sequelize.define('Question', {
     userId: DataTypes.INTEGER,
-    title: DataTypes.TEXT,
+    title: DataTypes.STRING,
     body: DataTypes.TEXT,
     imageOptional1: DataTypes.TEXT,
     imageOptional2: DataTypes.TEXT,

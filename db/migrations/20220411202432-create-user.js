@@ -30,9 +30,9 @@ module.exports = {
         unique: true,
         type: Sequelize.STRING(200)
       },
-      password: {
+      hashedPassword: {
         allowNull: false,
-        type: Sequelize.STRING(100)
+        type: Sequelize.STRING.BINARY
       },
       profilePicture: {
         type: Sequelize.TEXT

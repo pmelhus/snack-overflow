@@ -8,5 +8,11 @@ block content
         +field('Username', 'userName', userName, 'text')
         +field('Password', 'password', password, 'password')
         button Log In!
-        button: a(href='/') Cancel
-        a(href='/users/signup') Need to sign up?
+    button: a(href='/') Cancel
+    a(href='/users/signup') Need to sign up?
+
+     form(action='/users/login' method='POST')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        input(type='hidden' name='userName' value='pmelhus')
+        input(type='hidden' name='password' value="Aaaaaaaa1!")
+        button Paul Log In!

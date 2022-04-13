@@ -5,16 +5,19 @@ const { check, validationResult } = require("express-validator");
 const { Question, Answer, User } = require("../db/models");
 const { asyncHandler, handleValidationErrors } = require("../utils");
 const csrfProtection = csrf({ cookie: true });
+const { requireAuth } = require('../auth');
+
 
 router.get("/", asyncHandler(async(req, res) => {
+    console.log("IN GET QUESTIONS ROUTER")
+    console.log(req.session.auth)
     const questions = await Question.findAll( {include: [Answer, User]});
-    console.log(questions);
     res.render("questions", { questions })
 }));
 
-router.get('/new', asyncHandler(async(req, res) => {
-    // TODO: pass in tags to render
-    res.render('question-form')
+router.get('/new', requireAuth, asyncHandler(async(req, res) => {
+    const {question, user} = req.body
+    res.render('question-form', question, user)
 }))
 
 const questionValidators = [
@@ -30,9 +33,10 @@ const questionValidators = [
 
 router.post('/new', questionValidators, asyncHandler(async(req, res) => {
     const {title, body} = req.body
+    console.log(res.locals)
     const validationErrors = validationResult(req);
     if (validationErrors.isEmpty()) {
-        const question = await Question.create({title, body})
+        const question = await Question.create({userId: res.locals.user.id, title, body})
         res.redirect('/questions')
     } else {
         const errors = validationErrors.array().map((error) => error.msg);

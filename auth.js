@@ -1,3 +1,5 @@
+const { Question, Answer, User } = require("./db/models");
+
 const loginUser = (req, res, user) => {
     req.session.auth = {
       userId: user.id,
@@ -12,7 +14,7 @@ const loginUser = (req, res, user) => {
       const { userId } = req.session.auth;
 
       try {
-        const user = await db.User.findByPk(userId);
+        const user = await User.findByPk(userId);
 
         if (user) {
           res.locals.authenticated = true;
@@ -29,8 +31,16 @@ const loginUser = (req, res, user) => {
     }
   };
 
+  const requireAuth = (req, res, next) => {
+    if (!res.locals.authenticated) {
+      return res.redirect('/users/login');
+    }
+    return next();
+  };
+
   module.exports = {
     loginUser,
     logoutUser,
-    restoreUser
+    restoreUser,
+    requireAuth
   };

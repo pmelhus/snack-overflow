@@ -15,11 +15,11 @@ const validateAnswers = [
 ]
 
 
-//add the correct router once this is working with front end
 router.get("/", asyncHandler(async(req,res)=>{
+    //TODO: add the correct router once this is working with front end
     //split the router later maybe?
-    const answer = await Answer.findAll()
-    res.render("answer", {answer})
+    const answers = await Answer.findAll({include: [User, Question]})
+    res.render("answers", { answers })
 }))
 
 

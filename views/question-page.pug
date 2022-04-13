@@ -9,19 +9,20 @@ block content
         button: a(href='questions/question-form') New Question
     div
         p #{question.body}
+        if question.userId == //-TODO: CURRENT USER FROM SESSION
 
     p #{answers.length} answers
 
     div
         each answer in answers
             div
-                button: a(//- ANSWER ROUTING -//) Upvote Answer
+                button: a(//- VOTE ROUTING -//) Upvote Answer
                 p: #{answer.answerScore}
-                button: a(//- ANSWER ROUTING -//) Downvote Answer
+                button: a(//- VOTE ROUTING -//) Downvote Answer
                 p answered at #{answer.created_at}
                 p #{answer.body}
-                button: a(//- ANSWER ROUTING -//) Edit Answer
-                button: a(//- ANSWER ROUTING -//) Delete Answer
-
+                if answer.user_id == //-TODO: CURRENT USER FROM SESSION
+                    button: a(href='/answers/:id/edit') Edit Answer
+                    button: a(href='/answers/:id/delete') Delete Answer
     div
         p new answer

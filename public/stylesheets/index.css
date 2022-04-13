@@ -1,3 +1,17 @@
 h1 {
     color: #555555;
 }
+.user-forms {
+    background-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-field {
+    display: flex;
+    font-size: 20px;
+}
+.user-form-button {
+    border-radius: 2px;
+}

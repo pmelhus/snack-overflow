@@ -17,9 +17,11 @@ router.get('/new', csrfProtection, asyncHandler(async(req, res) => {
 }))
 
 router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
-    const {id, title, body, imageOptional1, imageOptional2, imageOptional3} = req.body;
+    const id = await req.params.id;
+    console.log(id);
     const question = await Question.findByPk(id, {include: [Answer, User]});
-    res.render('question-page');
+    const answers = await Answer.findAll({where: {questionId: question.id}})
+    return res.render('question-page', {question, answers});
 }))
 
 module.exports = router;

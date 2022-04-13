@@ -4,4 +4,24 @@ include utils.pug
 
 block content
     div
-        h2
+        h2 #{question.title}
+        p asked at #{question.created_at}
+        button: a(href='questions/question-form') New Question
+    div
+        p #{question.body}
+
+    p #{answers.length} answers
+
+    div
+        each answer in answers
+            div
+                button: a(//- ANSWER ROUTING -//) Upvote Answer
+                p: #{answer.answerScore}
+                button: a(//- ANSWER ROUTING -//) Downvote Answer
+                p answered at #{answer.created_at}
+                p #{answer.body}
+                button: a(//- ANSWER ROUTING -//) Edit Answer
+                button: a(//- ANSWER ROUTING -//) Delete Answer
+
+    div
+        p new answer

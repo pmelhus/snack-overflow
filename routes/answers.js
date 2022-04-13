@@ -23,4 +23,22 @@ router.get(
   })
 );
 
+router.post('/', asyncHandler(async(req,res)=>{
+  console.log(req.body)
+  res.redirect("/answers/new")
+}))
+
+router.get('/new', csrfProtection, asyncHandler(async(req,res,next)=>{
+  const answerForm = await Answer.findAll({include:[User, Question]});
+  res.render("answer-form", {answerForm});
+}))
+
+router.post('/new', validateAnswers, asyncHandler(async(req,res,next)=>{
+  const newAnswer = req.body.body
+  console.log(newAnswer)
+  const newAnswer1 = await Answer.create({questionId:2, body:newAnswer, answerScore:0, userId:1, createdAt: 2022-02-01, updatedAt: 2022-02-01})
+  const answers = await Answer.findAll({include: [User, Question]})
+  res.redirect("/answers")
+}))
+
 module.exports = router;

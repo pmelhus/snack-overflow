@@ -182,13 +182,13 @@ router.post(
 );
 
 
-router.get("/users/logout", asyncHandler (async(req, res) => {
+router.get("/logout", asyncHandler (async(req, res) => {
   res.render("user-logout");
 }));
 
-router.post("/users/logout", asyncHandler(async(req, res) => {
+router.post("/logout", asyncHandler(async(req, res) => {
  logoutUser(req, res);
-  return res.redirect("/");
+  res.redirect("/");
 }));
 
 module.exports = router;

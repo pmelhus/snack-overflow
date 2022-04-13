@@ -3,8 +3,8 @@ extends layout.pug
 include utils.pug
 
 block content
-  form(action='/users/logout' method='post')
+  form.user-forms(action='users/logout' method='post')
     div
       p Are you sure you want to logout?
-        button Yes, log me out.
-        a(href='/') Cancel
+      button.user-form-button Yes, log me out.
+      a(href='/') Cancel

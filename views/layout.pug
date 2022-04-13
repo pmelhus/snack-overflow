@@ -21,7 +21,7 @@ html
               a(href='/users/#{user.id}') Profile
               a(href='/users/logout') Logout
 
-            else if !user && (req.params.url === '/users/login')
-              a(href='users/signup') Sign Up!
-              a(href='users/login') Login!
+            else
+              a(href='/users/signup') Sign Up!
+              a(href='/users/login') Login!
             block content

@@ -5,4 +5,23 @@ html
         title= title
         link(rel='stylesheet' href='/stylesheets/reset.css')
   body
-    block content
+    header
+      nav
+        div
+          span
+            a(href='/') Snack Overflow
+          span
+            form(action="/questions")
+              input(type='search' name='term' placeholder='What are you craving?' required)
+              button Forage!
+          span
+
+            if user
+              span Welcome, #{user.userName}!
+              a(href='/users/#{user.id}') Profile
+              a(href='/users/logout') Logout
+
+            else
+              a(href='users/signup') Sign Up!
+              a(href='users/login') Login!
+              block content

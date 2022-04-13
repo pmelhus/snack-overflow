@@ -97,7 +97,7 @@ router.post(
       user.hashedPassword = hashedPassword;
       await user.save();
       loginUser(req, res, user);
-      return res.redirect("/");
+      res.redirect("/questions");
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
       // need to pass errors into a res.render method, but also need to ensure the correct
@@ -106,7 +106,7 @@ router.post(
 
       res.render("user-signup", {
         title: "Signup form",
-        csrfToken: req.csrfToken,
+        csrfToken: req.csrfToken(),
         user,
         errors,
       });

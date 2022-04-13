@@ -16,4 +16,10 @@ router.get('/new', csrfProtection, asyncHandler(async(req, res) => {
     res.render('question-form', {csrfToken: req.csrfToken()})
 }))
 
+router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
+    const {id, title, body, imageOptional1, imageOptional2, imageOptional3} = req.body;
+    const question = await Question.findByPk(id, {include: [Answer, User]});
+    res.render('question-page');
+}))
+
 module.exports = router;

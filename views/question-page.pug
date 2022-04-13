@@ -22,7 +22,10 @@ block content
                 p answered at #{answer.created_at}
                 p #{answer.body}
                 if answer.user_id == //-TODO: CURRENT USER FROM SESSION
-                    button: a(href='/answers/:id/edit') Edit Answer
-                    button: a(href='/answers/:id/delete') Delete Answer
+                    button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
+                    button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer
     div
-        p new answer
+        p Your Answer
+        form(action='')
+        +field('Body', 'body', answer.body, 'text')
+        button Post Answer

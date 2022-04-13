@@ -47,4 +47,14 @@ router.post('/new', questionValidators, asyncHandler(async(req, res) => {
     }
 }))
 
+router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
+    const id = await req.params.id;
+    console.log(id);
+    const question = await Question.findByPk(id, {include: [Answer, User]});
+    const answers = await Answer.findAll({where: {questionId: question.id}})
+    const { questionId, body, answerScore, userId} = Answer
+    await Answer.build()
+    return res.render('question-page', {question, answers});
+}))
+
 module.exports = router;

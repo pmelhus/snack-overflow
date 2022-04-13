@@ -9,23 +9,23 @@ block content
         button: a(href='questions/question-form') New Question
     div
         p #{question.body}
-        if question.userId == //-TODO: CURRENT USER FROM SESSION
+        //- if question.userId == //-TODO: CURRENT USER FROM SESSION
 
     p #{answers.length} answers
 
     div
         each answer in answers
             div
-                button: a(//- VOTE ROUTING -//) Upvote Answer
-                p: #{answer.answerScore}
-                button: a(//- VOTE ROUTING -//) Downvote Answer
+                //- button: a(//- VOTE ROUTING -//) Upvote Answer
+                //- p: #{answer.answerScore}
+                //- button: a(//- VOTE ROUTING -//) Downvote Answer
                 p answered at #{answer.created_at}
                 p #{answer.body}
-                if answer.user_id == //-TODO: CURRENT USER FROM SESSION
+                //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer
     div
         p Your Answer
         form(action='')
-        +field('Body', 'body', answer.body, 'text')
-        button Post Answer
+            +textarea('Body', 'body', body)
+            button Post Answer

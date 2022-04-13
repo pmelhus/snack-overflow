@@ -21,6 +21,8 @@ router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
     console.log(id);
     const question = await Question.findByPk(id, {include: [Answer, User]});
     const answers = await Answer.findAll({where: {questionId: question.id}})
+    const { questionId, body, answerScore, userId} = Answer
+    await Answer.build()
     return res.render('question-page', {question, answers});
 }))
 

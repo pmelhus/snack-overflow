@@ -9,3 +9,8 @@ mixin validationErrorSummary(errors)
         ul
             each error in errors
                 li= error
+
+mixin textarea(labelName, fieldName, fieldValue)
+    div
+        label(for=fieldName) #{labelName}
+        textarea(name=fieldName value=fieldValue)

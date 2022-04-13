@@ -4,4 +4,15 @@ include utils.pug
 
 block content
   h1 Ask a question!
-  form(action='/questions' method='POST')
+  div
+    +validationErrorSummary
+  div
+  form(action='/questions/new' method='POST')
+    div
+      +field2('Title', 'title', 'e.g. How many oreo\'s are too many oreo\'s?', 'text')
+    div
+      +textarea('Body', 'body', '', 'textarea')
+    //- div
+    //-   +select('Tags', 'tags', '', '' )
+    div
+      input(type='submit' value='Submit')

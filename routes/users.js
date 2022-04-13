@@ -134,27 +134,37 @@ const loginValidators = [
     .withMessage("Please provide a value for password"),
 ];
 
+router.use((req,res,next)=> {
+  console.log("THE REQUEST IS IN USER ROUTER")
+  next()
+})
+
 router.post(
   "/login",
   csrfProtection,
   loginValidators,
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     const { userName, password } = req.body;
 
     const validatorErrors = validationResult(req);
     const errors = [];
 
     if (validatorErrors.isEmpty()) {
+
       const user = await User.findOne({ where: { userName } });
+
       if (user !== null) {
+
         const passwordMatch = await bcrypt.compare(
           password,
           user.hashedPassword.toString()
         );
 
         if (passwordMatch) {
+
           loginUser(req, res, user);
-          return res.redirect("/");
+ 
+          res.redirect("/questions/");
         }
       }
       errors.push("Login failed for the provided username and password");
@@ -170,6 +180,7 @@ router.post(
     });
   })
 );
+
 
 router.get("/users/logout", (req, res) => {
   logoutUser(req, res);

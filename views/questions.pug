@@ -3,10 +3,20 @@ extends layout.pug
 include utils.pug
 
 block content
-    ul Questions
-        each question in questions
-            li
-                h2: a(href= `/questions/`) #{question.title}
+    div
+        h1 Questions
+        button: a(href='/questions/new') Ask question
+    div
+        ul
+            each question in questions
+                li
+                    div
+                        p # of answers
+                        h2: a(href= `/questions/`) #{question.title}
+                        div
+                            p tag
+                        p Username: time/date
+
         // add button to add new question
         // add button to add new answer
         // add button to delete question (if owned)

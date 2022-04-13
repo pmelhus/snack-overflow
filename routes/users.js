@@ -145,25 +145,25 @@ router.post(
   loginValidators,
   asyncHandler(async (req, res) => {
     const { userName, password } = req.body;
-console.log('THIS IS USER NAME AND PASSWORD: ' + userName, password)
+
     const validatorErrors = validationResult(req);
     const errors = [];
 
     if (validatorErrors.isEmpty()) {
-      console.log('IF VALIDATOR ERROR IS EMPTY IS TRUE')
+
       const user = await User.findOne({ where: { userName } });
-      console.log('THIS IS THE USER: ' + user)
+
       if (user !== null) {
-        console.log('IF USER NOT NULL RUNNING')
+
         const passwordMatch = await bcrypt.compare(
           password,
           user.hashedPassword.toString()
         );
 
         if (passwordMatch) {
-          console.log('IF PASSWORD MATCH RUNNING')
+
           loginUser(req, res, user);
-          console.log('Before question redirect')
+ 
           res.redirect("/questions/");
         }
       }

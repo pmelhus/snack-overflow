@@ -11,7 +11,7 @@ const usersRouter = require('./routes/users');
 const sessionSecret = require('./config/index')
 const { restoreUser } = require('./auth');
 const app = express();
-const questionsRouter = require('./routes/answers')
+const questionsRouter = require('./routes/questions')
 const answerRouter = require('./routes/answers')
 
 //test please delete this

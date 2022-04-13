@@ -12,4 +12,8 @@ router.get("/", asyncHandler(async(req, res) => {
     res.render("questions", { questions })
 }));
 
+router.get('/new', csrfProtection, asyncHandler(async(req, res) => {
+    res.render('question-form', {csrfToken: req.csrfToken()})
+}))
+
 module.exports = router;

@@ -147,7 +147,7 @@ router.post(
     const { userName, password } = req.body;
 
     const validatorErrors = validationResult(req);
-    const errors = [];
+    let errors = [];
 
     if (validatorErrors.isEmpty()) {
 
@@ -163,7 +163,7 @@ router.post(
         if (passwordMatch) {
 
           loginUser(req, res, user);
- 
+
           res.redirect("/questions/");
         }
       }

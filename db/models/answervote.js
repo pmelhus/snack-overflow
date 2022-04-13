@@ -1,7 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const AnswerVote = sequelize.define('AnswerVote', {
-    id: DataTypes.INTEGER,
     vote: DataTypes.BOOLEAN,
     userId: DataTypes.INTEGER,
     answerId: DataTypes.INTEGER

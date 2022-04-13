@@ -3,7 +3,10 @@ const loginUser = (req, res, user) => {
       userId: user.id,
     };
   };
-
+  const logoutUser = (req, res) => {
+    delete req.session.auth;
+  };
   module.exports = {
     loginUser,
+    logoutUser
   };

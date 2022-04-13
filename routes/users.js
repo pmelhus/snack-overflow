@@ -163,7 +163,7 @@ router.post(
         if (passwordMatch) {
 
           loginUser(req, res, user);
- 
+
           res.redirect("/questions/");
         }
       }
@@ -182,14 +182,13 @@ router.post(
 );
 
 
-router.get("/users/logout", (req, res) => {
-  logoutUser(req, res);
+router.get("/users/logout", asyncHandler (async(req, res) => {
   res.render("user-logout");
-});
+}));
 
-router.post("/users/logout", (req, res) => {
-  logoutUser(req, res);
-  res.redirect("/users/login");
-});
+router.post("/users/logout", asyncHandler(async(req, res) => {
+ logoutUser(req, res);
+  return res.redirect("/");
+}));
 
 module.exports = router;

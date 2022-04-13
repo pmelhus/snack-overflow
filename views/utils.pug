@@ -9,3 +9,23 @@ mixin validationErrorSummary(errors)
         ul
             each error in errors
                 li= error
+
+mixin field2(labelName, fieldName, fieldValue, fieldType)
+    div
+        label(for=fieldName)= labelName
+    div
+        input(type=fieldType name=fieldName value=fieldValue)
+
+mixin textarea(labelName, fieldName, fieldValue, fieldType)
+    div
+        label(for=fieldName)= labelName
+    div
+        textarea(type=fieldType name=fieldName value=fieldValue)
+
+mixin select(labelName, fieldName, fieldValue, fieldType)
+    div
+        label(for=fieldName)= labelName
+    div
+        select(name=fieldName)
+            //- each tag in tags
+                option(value='#{tag.name}')

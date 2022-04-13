@@ -1,11 +1,34 @@
-extends layout.pug
+doctype html
+html
+  head
+        title= "Answers"
+        link(rel='stylesheet' href='/stylesheets/reset.css')
+        script(src="/javascripts/answers.js" type="module" defer)
+  body
+    header
+      nav
+        div
+          span
+            a(href='/') Snack Overflow
+          span
+            form(action="/questions")
+              input(type='search' name='term' placeholder='What are you craving?' required)
+              button Forage!
+          span
 
-include utils.pug
+            if user
+              span Welcome, #{user.userName}!
+              a(href='/users/#{user.id}') Profile
+              a(href='/users/logout') Logout
 
-block content
-
-    
+            else
+              a(href='/users/signup') Sign Up!
+              a(href='/users/login') Login!
+    block content
         each answer in answers
             tr
                 td= answer.body
+            div(style={"padding-bottom": "50px;"})
                 td= answer.User.userName
+            div(style={"padding-bottom": "50px;"})
+        button#newAnswer(type="submit") New Answer

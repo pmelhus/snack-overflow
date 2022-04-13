@@ -1,5 +1,5 @@
 mixin field(labelName, fieldName, fieldValue, fieldType)
-    div
+    .form-field
         label(for=fieldName)= labelName
         input(type=fieldType name=fieldName value=fieldValue)
 
@@ -14,11 +14,11 @@ mixin validationErrorSummary(errors)
 mixin field2(labelName, fieldName, fieldValue, fieldType)
     div
         label(for=fieldName)= labelName
-    div
+    .form-field
         input(type=fieldType name=fieldName value=fieldValue)
 
 mixin textarea(labelName, fieldName, fieldValue)
-    div
+    .form-field
         label(for=fieldName) #{labelName}
         textarea(name=fieldName value=fieldValue)
 

@@ -11,7 +11,9 @@ block content
             each question in questions
                 li
                     div
-                        p #{answers.length} answers
+
+                        p # of answers
+
                         h2: a(href= `/questions/${question.id}`) #{question.title}
                         div
                             p tag

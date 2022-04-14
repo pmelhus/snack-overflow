@@ -4,6 +4,7 @@ include utils.pug
 
 append head
     script(src="/javascripts/questions.js" type="module" defer)
+    script(src="/javascripts/answers.js" type="module" defer)
 
 block content
     div
@@ -29,8 +30,8 @@ block content
                 //- button: a(//- VOTE ROUTING -//) Upvote Answer
                 //- p: #{answer.answerScore}
                 //- button: a(//- VOTE ROUTING -//) Downvote Answer
-                p answered at #{answer.created_at}
-                p #{answer.body}
+                p(id='answerDate') answered at #{answer.created_at}
+                p(id='answerBody') #{answer.body}
                 //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer

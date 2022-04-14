@@ -9,11 +9,11 @@ const { requireAuth } = require('../auth');
 
 
 router.get("/", asyncHandler(async(req, res) => {
-    console.log("IN GET QUESTIONS ROUTER")
-    console.log(req.session.auth)
+    const loggedInUser = await User.findByPk(res.locals.user.id);
+
     const questions = await Question.findAll( {include: [Answer, User]});
     let answers = questions.map(async q => await Answer.findAll({where: {questionId: q.id}}))
-    res.render("questions", { questions, answers })
+    res.render("questions", { loggedInUser, questions, answers })
 }));
 
 router.get('/new', requireAuth, asyncHandler(async(req, res) => {

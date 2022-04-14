@@ -89,8 +89,10 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const { firstName, lastName, userName, email, password, confirmPassword } =
       req.body;
-    const user = User.build({ firstName, lastName, userName, email });
+    const user = await User.build({ firstName, lastName, userName, email });
     const validationErrors = validationResult(req);
+
+    // const loggedInUser = await User.findAll({ where: { User: res.locals.user.id }});
 
     if (validationErrors.isEmpty()) {
       const hashedPassword = await bcrypt.hash(password, 10);

@@ -13,8 +13,8 @@ router.get("/", asyncHandler(async(req, res) => {
     const questions = await Question.findAll( {include: [Answer, User]});
     let answers = questions.map(async q => await Answer.findAll({where: {questionId: q.id}}))
     if (res.locals.authenticated) {
-    const loggedInUser = await User.findByPk(res.locals.user.id);
-    res.render("questions", { loggedInUser, questions, answers })
+        const loggedInUser = await User.findByPk(res.locals.user.id);
+        res.render("questions", { loggedInUser, questions, answers })
     } else {
         res.render("questions", { questions, answers })
     }
@@ -38,10 +38,9 @@ const questionValidators = [
 
 router.post('/new', questionValidators, asyncHandler(async(req, res) => {
     const {title, body} = req.body
-    console.log(res.locals)
     const validationErrors = validationResult(req);
+    const question = await Question.create({userId: res.locals.user.id, title, body})
     if (validationErrors.isEmpty()) {
-        const question = await Question.create({userId: res.locals.user.id, title, body})
         res.redirect('/questions')
     } else {
         const errors = validationErrors.array().map((error) => error.msg);
@@ -54,12 +53,21 @@ router.post('/new', questionValidators, asyncHandler(async(req, res) => {
 
 router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
     const id = await req.params.id;
-    console.log(id);
     const question = await Question.findByPk(id, {include: [Answer, User]});
     const answers = await Answer.findAll({where: {questionId: question.id}})
+    const loggedInUser = await User.findByPk(res.locals.user.id);
     const { questionId, body, answerScore, userId} = Answer
     await Answer.build()
-    return res.render('question-page', {question, answers});
-}))
+    return res.render('question-page', {question, answers, loggedInUser});
+}));
+
+// router.put('/:id(\\d+)', asyncHandler(async(req, res, next) => {
+//     const id = await req.params.id;
+//     const question = await Question.findByPk(id, {include: [Answer, User]});
+//     const answers = await Answer.findAll({where: {questionId: question.id}})
+//     const { questionId, body, answerScore, userId} = Answer
+//     await Answer.update()
+//     return res.render('question-page', {question, answers});
+// }))
 
 module.exports = router;

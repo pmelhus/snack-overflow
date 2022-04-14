@@ -1,0 +1,11 @@
+extends layout.pug
+
+include utils.pug
+
+
+block content
+  div
+    h2 Are you sure you want to delete this question?
+      form(method="POST" action=`/questions/${id}/delete`)
+        button(type='submit') Yes, delete my question
+        a(href='/questions') Cancel

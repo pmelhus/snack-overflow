@@ -1,5 +1,6 @@
 // const answer = require("../../db/models/answer");
 let count = 0;
+
 let answerText = 'answers'
 
 window.addEventListener("DOMContentLoaded", ()=>{
@@ -58,3 +59,4 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
 
 })
+

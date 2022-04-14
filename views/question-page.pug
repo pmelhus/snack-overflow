@@ -13,8 +13,11 @@ block content
     div
         p #{question.body}
 
-        if question.userId == loggedInUser.id
-            button: a(href=`./${question.id}`) Edit
+        //- if question.userId == //-TODO: CURRENT USER FROM SESSION
+    if loggedInUser.id === question.userId
+        div
+             button: a(href=`./${question.id}`) Edit  
+             a(href=`/questions/${id}/delete`) Delete
 
     div(id="answerId")
         p(value="0") #{answers.length} answer

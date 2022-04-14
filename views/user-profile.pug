@@ -1,0 +1,24 @@
+extends layout.pug
+
+block content
+
+    if user.profile
+        img= user.profile
+    table
+        thead
+            tr
+                th Questions
+        tbody
+            each question in questions
+                tr
+                    td: h3: a(href=`/questions/${question.id}`) #{question.title}
+    table
+        thead
+            tr
+                th Answers
+                th
+        tbody
+            each answer in answers
+                tr
+                    td: a(href=`/questions/${answer.questionId}`) #{answer.Question.title}
+                    td= answer.body

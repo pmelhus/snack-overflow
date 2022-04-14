@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const csrf = require("csurf");
 const { check, validationResult } = require("express-validator");
-const { User } = require("../db/models");
+const { User, Question, Answer } = require("../db/models");
 const { asyncHandler, handleValidationErrors } = require("../utils");
-const { loginUser, logoutUser } = require("../auth");
+const { loginUser, logoutUser, requireAuth } = require("../auth");
 const csrfProtection = csrf({ cookie: true });
 const bcrypt = require("bcryptjs");
 
@@ -181,13 +181,19 @@ router.post(
   })
 );
 
+router.get('/:id(\\d+)', requireAuth, asyncHandler (async (req, res, next) => {
+  const userId = req.params.id
+  const user = await User.findByPk(userId, {include: [{model: Question, include: Answer}]})
+  const questions = await Question.findAll({where: {userId: user.id}})
+  const answers = await Answer.findAll({where: {userId: user.id}})
+  res.render('user-profile', {user, questions, answers})
+}))
 
-router.get("/users/logout", (req, res) => {
-  logoutUser(req, res);
+router.get("/logout", (req, res) => {
   res.render("user-logout");
 });
 
-router.post("/users/logout", (req, res) => {
+router.post("/logout", (req, res) => {
   logoutUser(req, res);
   res.redirect("/users/login");
 });

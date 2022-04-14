@@ -1,4 +1,6 @@
 // const answer = require("../../db/models/answer");
+let count = 0;
+let answerText = 'answers'
 
 window.addEventListener("DOMContentLoaded", ()=>{
     const form = document.getElementsByClassName("form-field")
@@ -6,13 +8,13 @@ window.addEventListener("DOMContentLoaded", ()=>{
     const textArea = (newForm[0].children.body);
     const listButtons = document.getElementsByTagName("button")
     const answerList = document.getElementById('answer')
+    const answerCount = document.getElementById('answerId')
 
 
     listButtons[2].addEventListener('click', async(e)=>{
         e.preventDefault(); //stops reload on new answer button
-//textArea.value = body text input
+        //textArea.value = body text input
         if(e){
-            console.log(answerList)
             const res = await fetch('/answers/new', {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
@@ -30,8 +32,18 @@ window.addEventListener("DOMContentLoaded", ()=>{
                 textArea.value = '';
                 answerList.appendChild(newDiv);
                 newDiv.appendChild(newAnswer);
+                count++;
+                const updateAnswerCount = answerCount.children[0];
+                updateAnswerCount.value = count;
+                if (count === 1){
+                    answerText = 'answer'
+                    updateAnswerCount.innerHTML = `${count} ${answerText}`
+                } else {
+                    answerText = 'answers'
+                    updateAnswerCount.innerHTML = `${count} ${answerText}`
+                }
             // }
-        }
+        } //add error for if the quesiton couldnt be retrieved
     })
 
 

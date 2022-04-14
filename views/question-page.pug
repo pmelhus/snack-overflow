@@ -14,7 +14,11 @@ block content
         p #{question.body}
         //- if question.userId == //-TODO: CURRENT USER FROM SESSION
 
-    p #{answers.length} answers
+    div(id="answerId")
+        p(value="0") #{answers.length} answer
+        //- add the correct starting count for each question!!
+
+        //- p #{answers.length} answers
 
     div(id="answer")
         each answer in answers

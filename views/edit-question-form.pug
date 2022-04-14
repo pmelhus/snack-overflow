@@ -3,15 +3,15 @@ extends layout.pug
 include utils.pug
 
 block content
-  h1 Ask a question!
+  h1 Edit your question!
   div
     +validationErrorSummary
   div
-  form(action='/questions' method='POST')
+  form(action=`/questions/${question.id}/edit` method='POST')
     div
-      +field2('Title', 'title', 'e.g. How many oreo\'s are too many oreo\'s?', 'text')
+      +field2('Title', 'title', question.title, 'text')
     div
-      +textarea('Body', 'body', '', 'textarea')
+      +textarea('Body', 'body', question.body)
     //- div
     //-   +select('Tags', 'tags', '', '' )
     div

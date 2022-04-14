@@ -46,7 +46,7 @@ const questionValidators = [
 ];
 
 
-router.post('/new', questionValidators, asyncHandler(async(req, res) => {
+router.post('/', questionValidators, asyncHandler(async(req, res) => {
     const {title, body} = req.body
 
     const validationErrors = validationResult(req);
@@ -82,6 +82,39 @@ router.get(
     return res.render("question-page", { question, answers, id, loggedInUser });
   })
 );
+
+router.get("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
+      const id = await req.params.id;
+      const loggedInUser = await User.findByPk(res.locals.user.id);
+      const question = await Question.findByPk(id, { include: [Answer, User] });
+      const answers = await Answer.findAll({
+        where: { questionId: question.id },
+      });
+      const { questionId, body, answerScore, userId } = Answer;
+      question.body.value
+      await Answer.build();
+      return res.render("edit-question-form", { question, answers, id, loggedInUser });
+    })
+  );
+
+router.post("/:id(\\d+)/edit", questionValidators, asyncHandler(async(req, res) => {
+    const {title, body, id} = req.body
+    const validationErrors = validationResult(req);
+    const questionId = parseInt(req.params.id, 10);
+    const question = await Question.findByPk(questionId);
+    // const { title, body } = question
+
+    if (validationErrors.isEmpty()) {
+    await question.update({ title: req.body.title, body: req.body.body });
+      res.redirect(`/questions/${questionId}`);
+    } else {
+      const errors = validationErrors.array().map((error) => error.msg);
+      res.render("edit-questions-form", {
+        question,
+        errors,
+      });
+    }
+}))
 
 router.get(
   "/:id(\\d+)/delete",

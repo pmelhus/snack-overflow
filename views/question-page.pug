@@ -12,12 +12,10 @@ block content
         button: a(href='./new') New Question
     div
         p #{question.body}
-
-        //- if question.userId == //-TODO: CURRENT USER FROM SESSION
-    if loggedInUser.id === question.userId
-        div
-             button: a(href=`./${question.id}`) Edit  
-             a(href=`/questions/${id}/delete`) Delete
+        if loggedInUser.id === question.userId
+            div
+                 button: a(href=`./${question.id}/edit`) Edit
+                 a(href=`/questions/${id}/delete`) Delete
 
     div(id="answerId")
         p(value="0") #{answers.length} answer

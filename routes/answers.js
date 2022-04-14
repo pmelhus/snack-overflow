@@ -36,11 +36,9 @@ router.get('/new', csrfProtection, asyncHandler(async(req,res,next)=>{
 
 router.post('/new',validateAnswers, asyncHandler(async(req,res,next)=>{
   const newAnswer = req.body.body
-  console.log("_______________________",req)
   const urlId = parseInt(req.rawHeaders[27].split('/')[4]);
-  console.log(urlId);
   const postingUser = req.session.auth.userId;
-  await Answer.create({questionId: urlId, body:newAnswer, answerScore:0, userId:postingUser, createdAt: 2022-02-01, updatedAt: 2022-02-01})
+  await Answer.create({questionId: urlId, body:newAnswer, answerScore:0, userId:postingUser})
   const answers = await Answer.findAll({include: [User, Question]})
   //res.redirect("/answers")
   res.send('ok') //add a status to this later?

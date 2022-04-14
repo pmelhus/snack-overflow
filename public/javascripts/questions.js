@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
     const form = document.getElementsByClassName("form-field")
     const newForm = Array.from(form)
     const textArea = (newForm[0].children.body);
-    const listButtons = document.getElementsByTagName("button")
+    const answerButton = document.getElementById('submit-a')
     const answerList = document.getElementById('answer')
     const answerCount = document.getElementById('answerId')
     const questionLinks = document.querySelectorAll('h2 > a')
@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
     // })
 
 
-    listButtons[2].addEventListener('click', async(e)=>{
+    answerButton.addEventListener('click', async(e)=>{
         e.preventDefault(); //stops reload on new answer button
         //textArea.value = body text input
         if(e){

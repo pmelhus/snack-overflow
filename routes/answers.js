@@ -35,10 +35,11 @@ router.get('/new', csrfProtection, asyncHandler(async(req,res,next)=>{
 
 router.post('/new', validateAnswers, asyncHandler(async(req,res,next)=>{
   const newAnswer = req.body.body
-  console.log(newAnswer)
+  console.log(req.body)
   const newAnswer1 = await Answer.create({questionId:2, body:newAnswer, answerScore:0, userId:1, createdAt: 2022-02-01, updatedAt: 2022-02-01})
   const answers = await Answer.findAll({include: [User, Question]})
-  res.redirect("/answers")
+  //res.redirect("/answers")
+  res.send('ok')
 }))
 
 module.exports = router;

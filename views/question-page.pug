@@ -2,6 +2,9 @@ extends layout.pug
 
 include utils.pug
 
+append head
+    script(src="/javascripts/questions.js" type="module" defer)
+
 block content
     div
         h2 #{question.title}
@@ -13,7 +16,7 @@ block content
 
     p #{answers.length} answers
 
-    div
+    div(id="answer")
         each answer in answers
             div
                 //- button: a(//- VOTE ROUTING -//) Upvote Answer
@@ -28,4 +31,4 @@ block content
         p Your Answer
         form(action='')
             +textarea('Body', 'body', body)
-            button Post Answer
+            button New Answer

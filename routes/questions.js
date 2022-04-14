@@ -87,8 +87,6 @@ router.get(
   "/:id(\\d+)/delete",
   asyncHandler(async (req, res) => {
     const id = await req.params.id;
-
-
     res.render("delete-confirmation", { id });
   })
 );
@@ -103,13 +101,7 @@ router.post(
   })
 );
 
-    const question = await Question.findByPk(id, {include: [Answer, User]});
-    const answers = await Answer.findAll({where: {questionId: question.id}})
-    const loggedInUser = await User.findByPk(res.locals.user.id);
-    const { questionId, body, answerScore, userId} = Answer
-    await Answer.build()
-    return res.render('question-page', {question, answers, loggedInUser});
-}));
+
 
 // router.put('/:id(\\d+)', asyncHandler(async(req, res, next) => {
 //     const id = await req.params.id;

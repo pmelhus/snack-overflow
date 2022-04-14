@@ -166,7 +166,7 @@ router.post(
 
           loginUser(req, res, user);
 
-          res.redirect("/questions/");
+          res.redirect("/questions");
         }
       }
       errors.push("Login failed for the provided username and password");
@@ -197,7 +197,9 @@ router.get("/logout", (req, res) => {
 
 router.post("/logout", (req, res) => {
   logoutUser(req, res);
-  res.redirect("/users/login");
+  console.log("HEEERE" + req.params.id)
+
+  res.redirect("/");
 });
 
 module.exports = router;

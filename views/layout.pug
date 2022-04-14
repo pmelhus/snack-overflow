@@ -18,7 +18,7 @@ html
 
             if loggedInUser
               span Welcome, #{loggedInUser.userName}!
-              a(href='/users/#{loggedInUser.id}') Profile
+              a(href=`/users/${loggedInUser.id}`) Profile
               a(href='/users/logout') Logout
 
             else

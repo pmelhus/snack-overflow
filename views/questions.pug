@@ -14,8 +14,10 @@ block content
             each question in questions
                 li
                     div
-
-                        p # number of answers 
+                        unless question.Answers.length ===  1
+                            p #{question.Answers.length} answers
+                        else
+                            p #{question.Answers.length} answer
 
                         h2: a(href= `/questions/${question.id}`) #{question.title}
                         div

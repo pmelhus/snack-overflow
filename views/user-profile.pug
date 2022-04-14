@@ -2,6 +2,7 @@ extends layout.pug
 
 block content
 
+    if questions
     table
         thead
             tr
@@ -10,6 +11,7 @@ block content
             each question in questions
                 tr
                     td: h3: a(href=`/questions/${question.id}`) #{question.title}
+    if answers
     table
         thead
             tr

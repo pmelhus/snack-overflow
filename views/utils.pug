@@ -16,10 +16,10 @@ mixin field2(labelName, fieldName, fieldValue, fieldType)
     .form-field
         input(type=fieldType name=fieldName value=fieldValue)
 
-mixin textarea(labelName, fieldName, fieldValue)
+mixin textarea(labelName, fieldName, fieldValue, )
     .form-field
         label(for=fieldName) #{labelName}
-        textarea(name=fieldName value=fieldValue)
+        textarea(name=fieldName) #{fieldValue}
 
 mixin select(labelName, fieldName, fieldValue, fieldType)
     div

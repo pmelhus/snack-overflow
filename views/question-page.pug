@@ -9,7 +9,7 @@ block content
     div
         h2 #{question.title}
         p asked at #{question.created_at}
-        button: a(href='questions/question-form') New Question
+        button: a(href='./new') New Question
     div
         p #{question.body}
         //- if question.userId == //-TODO: CURRENT USER FROM SESSION

@@ -9,6 +9,16 @@ window.addEventListener("DOMContentLoaded", ()=>{
     const listButtons = document.getElementsByTagName("button")
     const answerList = document.getElementById('answer')
     const answerCount = document.getElementById('answerId')
+    const questionLinks = document.querySelectorAll('h2 > a')
+
+    // questionLinks.forEach((link) => {
+    //     const linkId = req.params.url.split('/')[2]
+    //     link.addEventListener('click', async(e) => {
+    //         const res = fetch(`/questions/${linkId}/answers`)
+    //         const data = res.json()
+    //         console.log(data)
+    //     })
+    // })
 
 
     listButtons[2].addEventListener('click', async(e)=>{

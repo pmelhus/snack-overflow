@@ -18,7 +18,7 @@ html
 
             if user
               span Welcome, #{user.userName}!
-              a(href='/users/#{user.id}') Profile
+              a(href=`/users/${user.id}`) Profile
               a(href='/users/logout') Logout
 
             else

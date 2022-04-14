@@ -4,7 +4,7 @@ include utils.pug
 
 append head
     script(src="/javascripts/questions.js" type="module" defer)
-    
+
 block content
     div
         h1 Questions
@@ -15,7 +15,7 @@ block content
                 li
                     div
 
-                        p # of answers
+                        p # number of answers 
 
                         h2: a(href= `/questions/${question.id}`) #{question.title}
                         div

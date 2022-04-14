@@ -15,8 +15,10 @@ router.get(
       async (q) => await Answer.findAll({ where: { questionId: q.id } })
     );
     if (res.locals.authenticated) {
-      const loggedInUser = await User.findByPk(res.locals.user.id);
-      res.render("questions", { loggedInUser, questions, answers });
+
+        const loggedInUser = await User.findByPk(res.locals.user.id);
+        res.render("questions", { loggedInUser, questions, answers })
+
     } else {
       res.render("questions", { questions, answers });
     }
@@ -43,13 +45,12 @@ const questionValidators = [
     .withMessage("Please provide a value for body"),
 ];
 
-router.post(
-  "/new",
-  questionValidators,
-  asyncHandler(async (req, res) => {
-    const { title, body } = req.body;
-    console.log(res.locals);
+
+router.post('/new', questionValidators, asyncHandler(async(req, res) => {
+    const {title, body} = req.body
+
     const validationErrors = validationResult(req);
+
     if (validationErrors.isEmpty()) {
       const question = await Question.create({
         userId: res.locals.user.id,
@@ -87,6 +88,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const id = await req.params.id;
 
+
     res.render("delete-confirmation", { id });
   })
 );
@@ -100,5 +102,23 @@ router.post(
     res.redirect("/questions");
   })
 );
+
+    const question = await Question.findByPk(id, {include: [Answer, User]});
+    const answers = await Answer.findAll({where: {questionId: question.id}})
+    const loggedInUser = await User.findByPk(res.locals.user.id);
+    const { questionId, body, answerScore, userId} = Answer
+    await Answer.build()
+    return res.render('question-page', {question, answers, loggedInUser});
+}));
+
+// router.put('/:id(\\d+)', asyncHandler(async(req, res, next) => {
+//     const id = await req.params.id;
+//     const question = await Question.findByPk(id, {include: [Answer, User]});
+//     const answers = await Answer.findAll({where: {questionId: question.id}})
+//     const { questionId, body, answerScore, userId} = Answer
+//     await Answer.update()
+//     return res.render('question-page', {question, answers});
+// }))
+
 
 module.exports = router;

@@ -15,7 +15,7 @@ html
               input(type='search' name='term' placeholder='What are you craving?' required)
               button Forage!
           span
-
+            if loggedInUser
               span Welcome, #{loggedInUser.userName}!
               a(href=`/users/${loggedInUser.id}`) Profile
 

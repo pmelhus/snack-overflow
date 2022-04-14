@@ -97,17 +97,16 @@ router.get("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
     })
   );
 
-router.put("/:id(\\d+)", asyncHandler(async(req, res) => {
-    const {title, body} = req.body
+router.post("/:id(\\d+)/edit", questionValidators, asyncHandler(async(req, res) => {
+    const {title, body, id} = req.body
     const validationErrors = validationResult(req);
+    const questionId = parseInt(req.params.id, 10);
+    const question = await Question.findByPk(questionId);
+    // const { title, body } = question
 
     if (validationErrors.isEmpty()) {
-      const question = await Question.create({
-        userId: res.locals.user.id,
-        title,
-        body,
-      });
-      res.redirect("/questions");
+    await question.update({ title: req.body.title, body: req.body.body });
+      res.redirect(`/questions/${questionId}`);
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
       res.render("edit-questions-form", {

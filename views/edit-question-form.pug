@@ -7,7 +7,7 @@ block content
   div
     +validationErrorSummary
   div
-  form(action=`/questions/${question.id}` method='PUT')
+  form(action=`/questions/${question.id}/edit` method='POST')
     div
       +field2('Title', 'title', question.title, 'text')
     div

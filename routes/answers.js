@@ -13,6 +13,7 @@ const validateAnswers = [
     .withMessage("Answer Body can't be empty."),
 ];
 
+
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -35,10 +36,12 @@ router.get('/new', csrfProtection, asyncHandler(async(req,res,next)=>{
 
 router.post('/new', validateAnswers, asyncHandler(async(req,res,next)=>{
   const newAnswer = req.body.body
-  console.log(newAnswer)
-  const newAnswer1 = await Answer.create({questionId:2, body:newAnswer, answerScore:0, userId:1, createdAt: 2022-02-01, updatedAt: 2022-02-01})
+  const postingUser = req.session.auth.userId;
+  // const currentQuestion = await.find
+  const newAnswer1 = await Answer.create({questionId: 2, body:newAnswer, answerScore:0, userId:postingUser, createdAt: 2022-02-01, updatedAt: 2022-02-01})
   const answers = await Answer.findAll({include: [User, Question]})
-  res.redirect("/answers")
+  //res.redirect("/answers")
+  res.send('ok') //add a status to this later?
 }))
 
 module.exports = router;

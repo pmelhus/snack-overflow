@@ -16,9 +16,9 @@ html
               button Forage!
           span
 
-            if user
-              span Welcome, #{user.userName}!
-              a(href=`/users/${user.id}`) Profile
+              span Welcome, #{loggedInUser.userName}!
+              a(href=`/users/${loggedInUser.id}`) Profile
+
               a(href='/users/logout') Logout
 
             else

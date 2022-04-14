@@ -89,8 +89,10 @@ router.post(
   asyncHandler(async (req, res, next) => {
     const { firstName, lastName, userName, email, password, confirmPassword } =
       req.body;
-    const user = User.build({ firstName, lastName, userName, email });
+    const user = await User.build({ firstName, lastName, userName, email });
     const validationErrors = validationResult(req);
+
+    // const loggedInUser = await User.findAll({ where: { User: res.locals.user.id }});
 
     if (validationErrors.isEmpty()) {
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -164,7 +166,7 @@ router.post(
 
           loginUser(req, res, user);
 
-          res.redirect("/questions/");
+          res.redirect("/questions");
         }
       }
       errors.push("Login failed for the provided username and password");
@@ -195,7 +197,9 @@ router.get("/logout", (req, res) => {
 
 router.post("/logout", (req, res) => {
   logoutUser(req, res);
-  res.redirect("/users/login");
+  console.log("HEEERE" + req.params.id)
+
+  res.redirect("/");
 });
 
 module.exports = router;

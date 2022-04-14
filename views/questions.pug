@@ -11,11 +11,13 @@ block content
             each question in questions
                 li
                     div
+
                         p # of answers
+
                         h2: a(href= `/questions/${question.id}`) #{question.title}
                         div
                             p tag
-                        p Username: time/date
+                        p #{question.User.userName}: Posted on #{question.createdAt.toDateString()}
 
         //- add button to add new question
         //- add button to add new answer

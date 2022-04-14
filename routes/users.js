@@ -188,7 +188,7 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler (async (req, res, next) => {
   const user = await User.findByPk(userId, {include: [{model: Question, include: Answer}]})
   const questions = await Question.findAll({where: {userId: user.id}})
   const answers = await Answer.findAll({where: {userId: user.id}})
-  res.render('user-profile', {user, questions, answers})
+  res.render('user-profile', {title: `${user.userName}'s profile page`, user, questions, answers})
 }))
 
 router.get("/logout", (req, res) => {

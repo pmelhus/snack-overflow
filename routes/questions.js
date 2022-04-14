@@ -14,6 +14,7 @@ router.get(
     let answers = questions.map(
       async (q) => await Answer.findAll({ where: { questionId: q.id } })
     );
+    console.log(questions.Answer)
     if (res.locals.authenticated) {
 
         const loggedInUser = await User.findByPk(res.locals.user.id);

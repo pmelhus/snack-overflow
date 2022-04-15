@@ -32,9 +32,8 @@ h1 {
 
 .hidden {
     display: none
-
+}
 .top-bar-container {
     display: flex;
     justify-content: space-between;
-
 }

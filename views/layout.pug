@@ -10,22 +10,20 @@ html
   body
     header
       nav
-        div.top-bar-container
-          span
-            a(href='/') Snack Overflow
-          span
-            form(action="/questions")
-              input(type='search' name='term' placeholder='What are you craving?' required)
-              button Forage!
-          span
-            if authenticated
-              span Welcome, #{user.userName}!
-              a(href=`/users/${user.id}`) Profile
+        ul.top-bar-container
+          li: a(href='/')
+            | Snack
+            bold Overfleaux
+          li: form(action='/search' role='search')
+                input(type='search' name='term' placeholder='What are you craving?' required)
+                button Forage!
+          if authenticated
+            li: a(href=`/users/${user.id}`) Profile
+            li: a(href='/users/logout') Logout
+          else
+            li: a(href='/users/signup') Sign Up!
+            li: a(href='/users/login') Login!
+            //- li: p Welcome, #{user.userName}!
 
-              a(href='/users/logout') Logout
-
-            else
-              a(href='/users/signup') Sign Up!
-              a(href='/users/login') Login!
     main
     block content

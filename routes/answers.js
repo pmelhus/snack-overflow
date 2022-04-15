@@ -31,6 +31,22 @@ router.post(
   })
 );
 
+
+router.get(
+  "/:id(\\d+)",
+  asyncHandler(async (req, res) => {
+    const id = await req.params.id;
+    const loggedInUser = await User.findByPk(res.locals.user.id);
+    const answer = await Answer.findByPk(id, { include: [Answer, User] });
+    const answers = await Answer.findAll({
+      where: { questionId: question.id },
+    });
+    const { questionId, body, answerScore, userId } = Answer;
+    await Answer.build();
+    return res.render("question-page", { question, answers, id, loggedInUser });
+  })
+);
+
 router.get(
   "/new",
   csrfProtection,
@@ -61,25 +77,18 @@ router.post(
         res.send("ok"); //add a status to this later?
       }
     });
-    // const urlId = parseInt(req.rawHeaders[27].split('/')[4]);
-    // const postingUser = req.session.auth.userId;
-    // await Answer.create({questionId: urlId, body:newAnswer, answerScore:0, userId:postingUser})
-    // const answers = await Answer.findAll({include: [User, Question]})
-    //res.redirect("/answers")
-    // res.send('ok') //add a status to this later?
   })
-);
-
+  );
 
 
 router.put(
-  '"/:id(\\d+)',
+  '/:id',
   asyncHandler(async (req, res) => {
     const id = req.params.id;
     const answer = await Answer.findByPk(id);
 
     answer.body = req.body.body;
-    await answer.save();
+    await answer.update({body: req.body.body})
 
     res.json({
       message: "Success",

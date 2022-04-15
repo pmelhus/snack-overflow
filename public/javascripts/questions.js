@@ -1,6 +1,7 @@
 // const answer = require("../../db/models/answer");
 let count = 0;
 
+// import editButtonHelper from './answer.js'
 let answerText = "answers";
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -32,6 +33,9 @@ window.addEventListener("DOMContentLoaded", () => {
           body: textArea.value,
         }),
       });
+      // const res2 = await  console.log(res)
+
+
 
       //const newAnswer = await res.json();
 
@@ -39,11 +43,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const newDiv = document.createElement("div");
       const newAnswer = document.createElement("p");
+      const editButton = document.createElement("button");
 
       newAnswer.innerText = textArea.value;
       textArea.value = "";
       answerList.appendChild(newDiv);
       newDiv.appendChild(newAnswer);
+      // newDiv.append(editButton)
+      // editButton.class = ".editButton"
+      // editButton.value = 'Edit'
+      // editButton.id = 'edit-button-'
+
+
       count++;
       const updateAnswerCount = answerCount.children[0];
       updateAnswerCount.value = count;

@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", (event) => {
+// export const editButtonsHelper = (editButtons) => {
   const editButtons = document.querySelectorAll(".editButton");
 
   for (let i = 0; i < editButtons.length; i++) {
@@ -21,19 +21,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            body,
+            body: body,
           }),
         });
         const data = await res.json();
         if (data.message === "Success") {
-          const answerBodyEle = document.getElementById(
-            `${postId}-edit-content`
-          );
-          answerBodyEle.innerHTML = data.answer.body;
+          const answerBodyEle = document.getElementById(`answerBody-${postId}`);
+          answerBodyEle.innerText = data.answer.body;
           form.classList.add("hidden");
-        } else {
         }
       });
     });
   }
-});
+// };
+

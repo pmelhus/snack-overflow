@@ -30,8 +30,8 @@ router.get(
   "/new",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { question, user } = req.body;
-    res.render("question-form", question, user);
+    // const { question, user } = req.body;
+    res.render("question-form");
   })
 );
 

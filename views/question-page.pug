@@ -26,12 +26,12 @@ block content
 
     div(id="answer")
         each answer in answers
-            div
+            div(id=`div-${answer.id}` class='answerDiv')
                 //- button: a(//- VOTE ROUTING -//) Upvote Answer
                 //- p: #{answer.answerScore}
                 //- button: a(//- VOTE ROUTING -//) Downvote Answer
-                p(id='answerDate') answered at #{answer.created_at}
-                p(id='answerBody') #{answer.body}
+                p(id='answerDate') answered at #{answer.createdAt}
+                p(id=`answerBody-${answer.id}`) #{answer.body}
                 if loggedInUser.id === answer.userId
                     button(class='editButton' id=`edit-button-${answer.id}`) Edit
                     form(class='hidden' id=`edit-form-${answer.id}`)

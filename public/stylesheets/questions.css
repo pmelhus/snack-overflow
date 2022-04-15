@@ -1,5 +1,6 @@
 html{
     font-family: sans-serif;
+    
 }
 h1{
     font-weight: 400;
@@ -18,6 +19,16 @@ a{
 }
 .a-display, .q-card-body p{
     color: rgb(66, 65, 65)
+}
+#q-body{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    top: 40px;
+    left: 20px;
+    width: 96%;
 }
 #q-head{
     display: flex;

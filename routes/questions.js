@@ -30,8 +30,10 @@ router.get(
   "/new",
   requireAuth,
   asyncHandler(async (req, res) => {
+
     const user = await User.findByPk(req.session.auth.userId)
     res.render("question-form", {title: 'Ask a Question!', user});
+
   })
 );
 

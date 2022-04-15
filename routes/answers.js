@@ -13,7 +13,6 @@ const validateAnswers = [
     .withMessage("Answer Body can't be empty."),
 ];
 
-
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -33,6 +32,7 @@ router.get('/new', csrfProtection, asyncHandler(async(req,res,next)=>{
   const answerForm = await Answer.findAll({include:[User, Question]});
   res.render("answer-form", {answerForm});
 }))
+
 
 router.post(
   "/new",
@@ -56,6 +56,23 @@ router.post(
       }
     })
   }))
+
+router.put(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const answer = await Answer.findByPk(id);
+
+    answer.body = req.body.body;
+    await answer.update({body: req.body.body})
+
+    res.json({
+      message: "Success",
+      answer,
+    });
+  })
+);
+
 
 
 module.exports = router;

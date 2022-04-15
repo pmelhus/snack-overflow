@@ -13,7 +13,6 @@ const validateAnswers = [
     .withMessage("Answer Body can't be empty."),
 ];
 
-
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -24,24 +23,51 @@ router.get(
   })
 );
 
-router.post('/', asyncHandler(async(req,res)=>{
-  console.log(req.body)
-  res.redirect("/answers/new")
-}))
+router.post(
+  "/",
+  asyncHandler(async (req, res) => {
+    console.log(req.body);
+    res.redirect("/answers/new");
+  })
+);
 
-router.get('/new', csrfProtection, asyncHandler(async(req,res,next)=>{
-  const answerForm = await Answer.findAll({include:[User, Question]});
-  res.render("answer-form", {answerForm});
-}))
+router.get(
+  "/new",
+  csrfProtection,
+  asyncHandler(async (req, res, next) => {
+    const answerForm = await Answer.findAll({ include: [User, Question] });
+    res.render("answer-form", { answerForm });
+  })
+);
 
-router.post('/new',validateAnswers, asyncHandler(async(req,res,next)=>{
-  const newAnswer = req.body.body
-  const urlId = parseInt(req.rawHeaders[27].split('/')[4]);
-  const postingUser = req.session.auth.userId;
-  await Answer.create({questionId: urlId, body:newAnswer, answerScore:0, userId:postingUser})
-  const answers = await Answer.findAll({include: [User, Question]})
-  //res.redirect("/answers")
-  res.send('ok') //add a status to this later?
-}))
+router.post(
+  "/new",
+  validateAnswers,
+  asyncHandler(async (req, res, next) => {
+    const newAnswer = req.body.body;
+    const answers = await Answer.findAll({ include: [User, Question] });
+
+    req.rawHeaders.forEach((header) => {
+      if (header.includes("questions/")) {
+        const urlId = header.split("/")[4];
+        const postingUser = req.session.auth.userId;
+        Answer.create({
+          questionId: urlId,
+          body: newAnswer,
+          answerScore: 0,
+          userId: postingUser,
+        });
+        //res.redirect("/answers")
+        res.send("ok"); //add a status to this later?
+      }
+    });
+    // const urlId = parseInt(req.rawHeaders[27].split('/')[4]);
+    // const postingUser = req.session.auth.userId;
+    // await Answer.create({questionId: urlId, body:newAnswer, answerScore:0, userId:postingUser})
+    // const answers = await Answer.findAll({include: [User, Question]})
+    //res.redirect("/answers")
+    // res.send('ok') //add a status to this later?
+  })
+);
 
 module.exports = router;

@@ -34,6 +34,16 @@ h1 {
     display: none
 }
 .top-bar-container {
+    height: 60px;
+    background-color: #ababab;
     display: flex;
+    flex-flow: row nowrap;
     justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    margin: 0px;
+}
+.search-bar {
+    width: 250px;
+    padding: 4px 20px 3px 5px;
 }

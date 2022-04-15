@@ -15,7 +15,7 @@ block content
         button: a(href='./new') New Question
     div
         p #{question.body}
-        if user.id === question.userId
+        if user && (user.id === question.userId)
             div
                  button: a(href=`./${question.id}/edit`) Edit
                  a(href=`/questions/${id}/delete`) Delete
@@ -38,7 +38,7 @@ block content
 
                 p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()} ||
                 p(id=`answerBody-${answer.id}`) #{answer.body}
-                if user.id === answer.userId
+                if user && (user.id === answer.userId)
                     button(class='editButton' id=`edit-button-${answer.id}`) Edit
                     form(class='hidden' id=`edit-form-${answer.id}`)
                         textarea(name="content" id=`${answer.id}-edit-content`) #{answer.body}

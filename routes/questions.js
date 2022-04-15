@@ -14,12 +14,15 @@ router.get(
     let answers = questions.map(
       async (q) => await Answer.findAll({ where: { questionId: q.id } })
     );
-    console.log(questions.Answer)
+    console.log(questions.Answer);
     if (req.session.auth) {
-
-        const user = await User.findByPk(req.session.auth.userId);
-        res.render("questions", {title: 'Snack Overfleaux', user, questions, answers })
-
+      const user = await User.findByPk(req.session.auth.userId);
+      res.render("questions", {
+        title: "Snack Overfleaux",
+        user,
+        questions,
+        answers,
+      });
     } else {
       res.render("questions", { questions, answers });
     }
@@ -30,10 +33,8 @@ router.get(
   "/new",
   requireAuth,
   asyncHandler(async (req, res) => {
-
-    const user = await User.findByPk(req.session.auth.userId)
-    res.render("question-form", {title: 'Ask a Question!', user});
-
+    const user = await User.findByPk(req.session.auth.userId);
+    res.render("question-form", { title: "Ask a Question!", user });
   })
 );
 
@@ -48,9 +49,11 @@ const questionValidators = [
     .withMessage("Please provide a value for body"),
 ];
 
-
-router.post('/', questionValidators, asyncHandler(async(req, res) => {
-    const {title, body} = req.body
+router.post(
+  "/",
+  questionValidators,
+  asyncHandler(async (req, res) => {
+    const { title, body } = req.body;
 
     const validationErrors = validationResult(req);
 
@@ -75,40 +78,66 @@ router.get(
   "/:id(\\d+)",
   asyncHandler(async (req, res) => {
     const id = await req.params.id;
-    const loggedInUser = await User.findByPk(res.locals.user.id);
+
     const question = await Question.findByPk(id, { include: [Answer, User] });
     const answers = await Answer.findAll({
       where: { questionId: question.id },
     });
     const { questionId, body, answerScore, userId } = Answer;
     await Answer.build();
-    return res.render("question-page", { title: `${question.User.userName}'s Question`, question, answers, id, loggedInUser });
+    if (res.locals.user) {
+      const loggedInUser = await User.findByPk(res.locals.user.id);
+      return res.render("question-page", {
+        title: `${question.User.userName}'s Question`,
+        question,
+        answers,
+        id,
+        loggedInUser,
+      });
+    } else {
+      return res.render("question-page", {
+        title: `${question.User.userName}'s Question`,
+        question,
+        answers,
+        id,
+      });
+    }
   })
 );
 
-router.get("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
-      const id = await req.params.id;
-      const loggedInUser = await User.findByPk(res.locals.user.id);
-      const question = await Question.findByPk(id, { include: [Answer, User] });
-      const answers = await Answer.findAll({
-        where: { questionId: question.id },
-      });
-      const { questionId, body, answerScore, userId } = Answer;
-      question.body.value
-      await Answer.build();
-      return res.render("edit-question-form", { question, answers, id, loggedInUser });
-    })
-  );
+router.get(
+  "/:id(\\d+)/edit",
+  asyncHandler(async (req, res) => {
+    const id = await req.params.id;
+    const loggedInUser = await User.findByPk(res.locals.user.id);
+    const question = await Question.findByPk(id, { include: [Answer, User] });
+    const answers = await Answer.findAll({
+      where: { questionId: question.id },
+    });
+    const { questionId, body, answerScore, userId } = Answer;
+    question.body.value;
+    await Answer.build();
+    return res.render("edit-question-form", {
+      question,
+      answers,
+      id,
+      loggedInUser,
+    });
+  })
+);
 
-router.post("/:id(\\d+)/edit", questionValidators, asyncHandler(async(req, res) => {
-    const {title, body, id} = req.body
+router.post(
+  "/:id(\\d+)/edit",
+  questionValidators,
+  asyncHandler(async (req, res) => {
+    const { title, body, id } = req.body;
     const validationErrors = validationResult(req);
     const questionId = parseInt(req.params.id, 10);
     const question = await Question.findByPk(questionId);
     // const { title, body } = question
 
     if (validationErrors.isEmpty()) {
-    await question.update({ title: req.body.title, body: req.body.body });
+      await question.update({ title: req.body.title, body: req.body.body });
       res.redirect(`/questions/${questionId}`);
     } else {
       const errors = validationErrors.array().map((error) => error.msg);
@@ -117,7 +146,8 @@ router.post("/:id(\\d+)/edit", questionValidators, asyncHandler(async(req, res) 
         errors,
       });
     }
-}))
+  })
+);
 
 router.get(
   "/:id(\\d+)/delete",
@@ -137,8 +167,6 @@ router.post(
   })
 );
 
-
-
 // router.put('/:id(\\d+)', asyncHandler(async(req, res, next) => {
 //     const id = await req.params.id;
 //     const question = await Question.findByPk(id, {include: [Answer, User]});
@@ -147,6 +175,5 @@ router.post(
 //     await Answer.update()
 //     return res.render('question-page', {question, answers});
 // }))
-
 
 module.exports = router;

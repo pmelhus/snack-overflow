@@ -1,14 +1,13 @@
-doctype html
 html
   head
-      block head
-        title= title
-        link(rel='favicon' href='snack-overfleaux.ico' type='image/x-icon')
-        link(rel='shortcut icon' href='snack-overfleaux.ico' type='image/x-icon')
-        link(rel='stylesheet' href='/stylesheets/index.css')
+    title= title
+    link(rel='stylesheet' href='/stylesheets/index.css')
+    link(rel='favicon' href='snack-overfleaux.ico' type='image/x-icon')
+    link(rel='icon' href='snack-overfleaux.ico' type='image/x-icon')
+
   body
     header
-      nav
+      nav.top-bar-container
         div
           span
             a(href='/') Snack Overflow
@@ -17,9 +16,9 @@ html
               input(type='search' name='term' placeholder='What are you craving?' required)
               button Forage!
           span
-            if loggedInUser
-              span Welcome, #{loggedInUser.userName}!
-              a(href=`/users/${loggedInUser.id}`) Profile
+            if authenticated
+              span Welcome, #{user.userName}!
+              a(href=`/users/${user.id}`) Profile
 
               a(href='/users/logout') Logout
 

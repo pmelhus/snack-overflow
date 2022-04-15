@@ -1,0 +1,25 @@
+html{
+    font-family: sans-serif;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: blue;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+#q-head{
+    display: flex;
+    justify-content: space-between;
+}
+
+#a-card{
+    display: flex;
+    justify-content: left;
+}
+a-form{
+    display: flex;
+    justify-content: left;
+}

@@ -1,14 +1,16 @@
 extends layout.pug
-
 include utils.pug
+
+append head
+  link(rel="stylesheet" href="/stylesheets/question-form.css")
 
 block content
   h1 Ask a question!
   div
     +validationErrorSummary
-  div
-  form(action='/questions' method='POST')
-    div
+  div(id='q-form')
+  form( action='/questions' method='POST')
+    div(id='title')
       +field2('Title', 'title', 'e.g. How many oreo\'s are too many oreo\'s?', 'text')
     div
       +textarea('Body', 'body', '', 'textarea')
@@ -16,3 +18,4 @@ block content
     //-   +select('Tags', 'tags', '', '' )
     div
       input(type='submit' value='Submit')
+

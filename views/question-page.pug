@@ -2,12 +2,16 @@ extends layout.pug
 
 include utils.pug
 
-append head
+prepend content
     script(src="/javascripts/questions.js" type="module" defer)
+
     script(src="/javascripts/answers.js" type="module" defer)
 
+    link(rel="stylesheet" href="/stylesheets/question-page.css")
+
+
 block content
-    div
+    div(id='q-head')
         h2 #{question.title}
         p asked at #{question.created_at}
         button: a(href='./new') New Question
@@ -26,7 +30,10 @@ block content
 
     div(id="answer")
         each answer in answers
-            div(id=`div-${answer.id}` class='answerDiv')
+
+         
+            div(id='a-card')
+
                 //- button: a(//- VOTE ROUTING -//) Upvote Answer
                 //- p: #{answer.answerScore}
                 //- button: a(//- VOTE ROUTING -//) Downvote Answer
@@ -40,7 +47,7 @@ block content
                 //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer
-    div
+    div(id='a-form')
         p Your Answer
         form(action='')
             +textarea('Body', 'body', body)

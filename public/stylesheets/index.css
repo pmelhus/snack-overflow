@@ -1,3 +1,7 @@
+html{
+    text-decoration: none;
+}
+
 h1 {
     color: #555555;
 }
@@ -15,6 +19,12 @@ h1 {
 .user-form-button {
     border-radius: 2px;
 }
+
 .hidden {
     display: none
+
+.top-bar-container {
+    display: flex;
+    justify-content: space-between;
+
 }

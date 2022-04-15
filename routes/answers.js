@@ -23,6 +23,7 @@ router.get(
   })
 );
 
+
 router.post(
   "/",
   asyncHandler(async (req, res) => {
@@ -96,5 +97,6 @@ router.put(
     });
   })
 );
+
 
 module.exports = router;

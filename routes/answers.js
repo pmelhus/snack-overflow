@@ -38,6 +38,7 @@ router.post('/new',validateAnswers, asyncHandler(async(req,res,next)=>{
   const newAnswer = req.body.body
   const urlId = parseInt(req.rawHeaders[27].split('/')[4]);
   const postingUser = req.session.auth.userId;
+  const urlI
   await Answer.create({questionId: urlId, body:newAnswer, answerScore:0, userId:postingUser})
   const answers = await Answer.findAll({include: [User, Question]})
   //res.redirect("/answers")

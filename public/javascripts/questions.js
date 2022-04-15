@@ -1,62 +1,204 @@
 // const answer = require("../../db/models/answer");
 let count = 0;
-
 let answerText = 'answers'
+let text = null
+let key = null
 
-window.addEventListener("DOMContentLoaded", ()=>{
+window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementsByClassName("form-field")
     const newForm = Array.from(form)
     const textArea = (newForm[0].children.body);
-    const answerButton = document.getElementById('submit-a')
+    const answerButton = document.getElementById('submit-answer')
     const answerList = document.getElementById('answer')
     const answerCount = document.getElementById('answerId')
     const questionLinks = document.querySelectorAll('h2 > a')
+    const buttonCards = document.querySelectorAll('#button-card');
+    const answerCards = Array.from(answerList.children)
+    const answerCardsArray = answerCards.map(card => card.id.split('-')[2])
+    const lastElArray = [(answerCardsArray[answerCardsArray.length - 1])]
+    const lastEl = lastElArray.join('')
+    const newElementId = parseInt(lastEl) + 1;
+    const answerDisplay = answerCount.children[0]
+    const answerListLength = parseInt(answerList.childNodes.length)
 
-    // questionLinks.forEach((link) => {
-    //     const linkId = req.params.url.split('/')[2]
-    //     link.addEventListener('click', async(e) => {
-    //         const res = fetch(`/questions/${linkId}/answers`)
-    //         const data = res.json()
-    //         console.log(data)
-    //     })
-    // })
+
+    answerCount.children[0].value = answerListLength
+
+    if (answerListLength === 0) {
+        answerDisplay.innerText = 'There are no answers yet! Maybe submit one to get things started?';
+    }
+    if (answerListLength === 1) {
+        answerDisplay.innerText = `${answerListLength} answer`
+    }
+    if (answerListLength > 1) {
+        answerDisplay.innerText = `${answerListLength} answers`
+    }
+
+    //posting and dynamically delete most recent answer
+    answerButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const h2 = document.getElementsByTagName('h2')[0]
+        const questionId = h2.id.split('-')[1];
+        const res = await fetch(`/answers/${questionId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                body: textArea.value
+            })
+        })
+        const data = await res.json()
+        const newId = data.id
+        const newBody = data.body
+        const createdAt = data.createdAt;
 
 
-    answerButton.addEventListener('click', async(e)=>{
-        e.preventDefault(); //stops reload on new answer button
-        //textArea.value = body text input
-        if(e){
-            const res = await fetch('/answers/new', {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    body: textArea.value
-                })
+        const newDiv = document.createElement('div');
+        const newAnswerAt = document.createElement('p')
+        newAnswerAt.innerText = 'answered at'
+        const newAnswer = document.createElement('p');
+        const buttonDiv = document.createElement('div');
+        const newEditButton = document.createElement('button')
+        const newDeleteButton = document.createElement('button')
+        newAnswer.innerText = textArea.value;
+        textArea.value = '';
+        newDiv.id = `new-div-${newId}`
+        answerList.appendChild(newDiv);
+        newDiv.appendChild(newAnswerAt)
+        newDiv.appendChild(newAnswer);
+        newAnswer.appendChild(buttonDiv)
+        newEditButton.innerText = 'EditAnswer'
+        newDeleteButton.innerText = 'Delete Answer'
+        newDeleteButton.id = `new-delete-button-${newId}`
+        newEditButton.id = `new-edit-button-${newId}`
+        buttonDiv.appendChild(newEditButton)
+        buttonDiv.appendChild(newDeleteButton)
+        const answerListLength = parseInt(answerList.childNodes.length)
+        const answerDisplay = answerCount.children[0]
+        answerDisplay.value = answerListLength
+
+        if (answerListLength === 1) {
+            answerDisplay.innerText = `${answerListLength} answer`
+        }
+        if (answerListLength > 1) {
+            answerDisplay.innerText = `${answerListLength} answers`
+        }
+        newDeleteButton.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            e.preventDefault()
+            const answerCard = document.getElementById(`new-div-${newId}`);
+            const res = await fetch(`/answers/instant/${newId}`, {
+                method: "DELETE",
+            })
+            answerCard.remove()
+            const newAnswerListLength = answerListLength - 1
+            if (newAnswerListLength === 1) {
+                answerDisplay.innerText = `${newAnswerListLength} answer`
+            }
+            if (newAnswerListLength > 1) {
+                answerDisplay.innerText = `${newAnswerListLength} answers`
+            }
+
+
+        })
+        //instant edit button
+
+        newEditButton.addEventListener('click', async (e)=>{
+            e.stopPropagation();
+            e.preventDefault();
+
+            const buttonId = e.target.id.split('-')[2]
+            textArea.id = `edit-box-${newId}`
+            const answerCard = document.getElementById(`new-div-${newId}`);
+            textArea.innerText = newBody
+            textArea.style = "color:red;font-weight:bold"
+            const newSubmitButton = document.createElement('button');
+            newSubmitButton.id = `submit-edit-button-${newId}`
+            newSubmitButton.innerText = "Submit Edited Answer";
+            newSubmitButton.style = "color:red", "font-weight:bold"
+            const newForm = document.querySelector('.form-field')
+            newForm.appendChild(newSubmitButton)
+            let textArray = []
+
+            textArea.addEventListener('input', async (e)=>{
+                textArray.push(e.data)
             })
 
-            //const newAnswer = await res.json();
+            newSubmitButton.addEventListener('click', async (e) =>{
+                e.preventDefault();
+                e.stopPropagation();
+                const content = textArray.join('')
+                const res = await fetch(`/answers/instant/${newId}`, {
+                    method: "PUT",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        content
+                    })
+                })
+                const data = await res.json();
+                const text = data.updatedBody
+                const textArea = document.getElementById(`edit-box-${newId}`)
+                const answerCard = document.getElementById(`new-div-${newId}`);
+                const answerCardItems = answerCard.children
+                answerCard.children[1].innerText = text
+                textArea.innerText = ''
+                textArea.style = 'color:black;'
+                newSubmitButton.remove()
+             })
+        })
 
-            // if(res.status === 200){
-                const newDiv = document.createElement('div');
-                const newAnswer = document.createElement('p');
-                newAnswer.innerText = textArea.value;
-                textArea.value = '';
-                answerList.appendChild(newDiv);
-                newDiv.appendChild(newAnswer);
-                count++;
-                const updateAnswerCount = answerCount.children[0];
-                updateAnswerCount.value = count;
-                if (count === 1){
-                    answerText = 'answer'
-                    updateAnswerCount.innerHTML = `${count} ${answerText}`
-                } else {
-                    answerText = 'answers'
-                    updateAnswerCount.innerHTML = `${count} ${answerText}`
-                }
-            // }
-        } //add error for if the quesiton couldnt be retrieved
+
+    })
+    buttonCards.forEach(buttonCard => {
+        const buttonGroups = buttonCard.children;
+        const editButton = buttonGroups[0];
+        const deleteButton = buttonGroups[1];
+        deleteButton.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const buttonId = e.target.id.split('-')[2]
+            const answerCard = document.getElementById(`answer-card-${buttonId}`);
+            const res = await fetch(`/answers/${buttonId}`, {
+                method: "DELETE",
+            })
+            answerCard.remove();
+        })
+        //EDIT BUTTON
+        editButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const buttonId = e.target.id.split('-')[2]
+            textArea.id = `edit-box-${buttonId}`
+            const answerCard = document.getElementById(`answer-card-${buttonId}`);
+            const answerBody = answerCard.children[1]
+            textArea.innerText = answerBody.innerText
+            textArea.style = "color:red;font-weight:bold"
+            const newSubmitButton = document.createElement('button');
+            newSubmitButton.id = `submit-edit-button-${buttonId}`
+            newSubmitButton.innerText = "Submit Edited Answer";
+            newSubmitButton.style = "color:red", "font-weight:bold"
+            const newForm = document.querySelector('.form-field')
+            newForm.appendChild(newSubmitButton)
+            let textArray = []
+            textArea.addEventListener('input', async (e)=>{
+                textArray.push(e.data)
+            })
+
+            newSubmitButton.addEventListener('click', async (e)=>{
+                e.preventDefault();
+                e.stopPropagation();
+                const content = textArray.join('')
+
+                const res = await fetch(`/answers/${buttonId}`, {
+                    method: "PUT",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                    content
+                })
+                })
+                const data = await res.json();
+            })
+        })
     })
 
 
 })
-

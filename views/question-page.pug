@@ -7,7 +7,7 @@ append head
 
 block content
     div
-        h2 #{question.title}
+        h2(id=`question-${question.id}`) #{question.title}
         p asked at #{question.created_at}
         button: a(href='./new') New Question
     div
@@ -25,12 +25,16 @@ block content
 
     div(id="answer")
         each answer in answers
-            div
+            div(id=`answer-card-${answer.id}`)
                 //- button: a(//- VOTE ROUTING -//) Upvote Answer
                 //- p: #{answer.answerScore}
                 //- button: a(//- VOTE ROUTING -//) Downvote Answer
                 p answered at #{answer.created_at}
                 p #{answer.body}
+                if loggedInUser.id === answer.userId
+                    div(id='button-card')
+                        button: a(id=`edit-a-${answer.id}`) Edit Answer
+                        button: a(id=`delete-a-${answer.id}`) Delete Answer
                 //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer
@@ -38,4 +42,4 @@ block content
         p Your Answer
         form(action='')
             +textarea('Body', 'body', body)
-            button(id='submit-a') New Answer
+            button(id=`submit-answer`) New Answer

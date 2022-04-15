@@ -1,14 +1,16 @@
 html
   head
     title= title
-    link(rel='stylesheet' href='/stylesheets/index.css')
     link(rel='favicon' href='snack-overfleaux.ico' type='image/x-icon')
     link(rel='icon' href='snack-overfleaux.ico' type='image/x-icon')
+    block styles
+      link(rel='stylesheet' href='/stylesheets/index.css')
+
 
   body
     header
-      nav.top-bar-container
-        div
+      nav
+        div.top-bar-container
           span
             a(href='/') Snack Overflow
           span

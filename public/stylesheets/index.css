@@ -1,5 +1,15 @@
 html{
+    font-family: sans-serif;
     text-decoration: none;
+}
+li{
+    list-style: none;
+}
+a{
+    /* text-decoration: none; */
+    color: blue;
+    font-weight: 400;
+    font-size: 1.2rem;
 }
 
 h1 {

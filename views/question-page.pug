@@ -4,7 +4,11 @@ include utils.pug
 
 prepend content
     script(src="/javascripts/questions.js" type="module" defer)
+
+    script(src="/javascripts/answers.js" type="module" defer)
+
     link(rel="stylesheet" href="/stylesheets/question-page.css")
+
 
 block content
     div(id='q-head')
@@ -26,12 +30,20 @@ block content
 
     div(id="answer")
         each answer in answers
+
+         
             div(id='a-card')
+
                 //- button: a(//- VOTE ROUTING -//) Upvote Answer
                 //- p: #{answer.answerScore}
                 //- button: a(//- VOTE ROUTING -//) Downvote Answer
-                p answered at #{answer.created_at}
-                p #{answer.body}
+                p(id='answerDate') answered at #{answer.createdAt}
+                p(id=`answerBody-${answer.id}`) #{answer.body}
+                if loggedInUser.id === answer.userId
+                    button(class='editButton' id=`edit-button-${answer.id}`) Edit
+                    form(class='hidden' id=`edit-form-${answer.id}`)
+                        textarea(name="content" id=`${answer.id}-edit-content`) #{answer.body}
+                        button(class="edit-submit" id=`edit-submit-${answer.id}`) Submit Edit
                 //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer

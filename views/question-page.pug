@@ -4,20 +4,18 @@ include utils.pug
 
 block styles
     script(src="/javascripts/questions.js" type="module" defer)
-
     script(src="/javascripts/answers.js" type="module" defer)
-
     link(rel="stylesheet" href="/stylesheets/question-page.css")
 
 
 block content
     div(id='q-head')
         h2 #{question.title}
-        p asked at #{question.created_at}
+        p asked at #{question.createdAt}
         button: a(href='./new') New Question
     div
         p #{question.body}
-        if loggedInUser.id === question.userId
+        if user.id === question.userId
             div
                  button: a(href=`./${question.id}/edit`) Edit
                  a(href=`/questions/${id}/delete`) Delete
@@ -38,9 +36,9 @@ block content
                 //- p: #{answer.answerScore}
                 //- button: a(//- VOTE ROUTING -//) Downvote Answer
 
-                p(id='answerDate') answered on #{answer.createdAt.toLocaleTimeString()} ||
+                p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()} ||
                 p(id=`answerBody-${answer.id}`) #{answer.body}
-                if loggedInUser.id === answer.userId
+                if user.id === answer.userId
                     button(class='editButton' id=`edit-button-${answer.id}`) Edit
                     form(class='hidden' id=`edit-form-${answer.id}`)
                         textarea(name="content" id=`${answer.id}-edit-content`) #{answer.body}

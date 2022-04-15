@@ -4,15 +4,14 @@ include utils.pug
 
 block styles
     script(src="/javascripts/questions.js" type="module" defer)
-
-    script(src="/javascripts/answer.js" type="module" defer)
-
+    script(src="/javascripts/answers.js" type="module" defer)
     link(rel="stylesheet" href="/stylesheets/questions.css")
+
 
 block content
     div(id='q-head')
         h1 Questions
-        button: a(href='/questions/new') Ask question
+        button(id='ask-q'): a(href='/questions/new') Ask question
     div
         ul
             each question in questions

@@ -44,3 +44,14 @@ a{
     margin-left: 16px;
 
 }
+#ask-q{
+    padding: 10px;
+    background-color: cornflowerblue;
+    border-radius: 3px;
+    border: 0px;
+}
+#ask-q a{
+    color: white;
+    font-size: .75rem;
+    font-weight: 400;
+}

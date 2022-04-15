@@ -15,10 +15,10 @@ router.get(
       async (q) => await Answer.findAll({ where: { questionId: q.id } })
     );
     console.log(questions.Answer)
-    if (res.locals.authenticated) {
+    if (req.session.auth) {
 
-        const loggedInUser = await User.findByPk(res.locals.user.id);
-        res.render("questions", { loggedInUser, questions, answers })
+        const user = await User.findByPk(req.session.auth.userId);
+        res.render("questions", {title: 'Snack Overfleaux', user, questions, answers })
 
     } else {
       res.render("questions", { questions, answers });
@@ -30,8 +30,8 @@ router.get(
   "/new",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { question, user } = req.body;
-    res.render("question-form", question, user);
+    const user = await User.findByPk(req.session.auth.userId)
+    res.render("question-form", {title: 'Ask a Question!', user});
   })
 );
 
@@ -80,7 +80,7 @@ router.get(
     });
     const { questionId, body, answerScore, userId } = Answer;
     await Answer.build();
-    return res.render("question-page", { question, answers, id, loggedInUser });
+    return res.render("question-page", { title: `${question.User.userName}'s Question`, question, answers, id, loggedInUser });
   })
 );
 

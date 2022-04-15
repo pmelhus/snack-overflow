@@ -15,3 +15,7 @@ h1 {
 .user-form-button {
     border-radius: 2px;
 }
+.top-bar-container {
+    display: flex;
+    justify-content: space-between;
+}

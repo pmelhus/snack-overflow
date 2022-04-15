@@ -1,5 +1,4 @@
 extends layout.pug
-
 include utils.pug
 
 append head
@@ -10,7 +9,7 @@ block content
   div
     +validationErrorSummary
   div(id='q-form')
-  form(id='q-form' action='/questions' method='POST')
+  form( action='/questions' method='POST')
     div(id='title')
       +field2('Title', 'title', 'e.g. How many oreo\'s are too many oreo\'s?', 'text')
     div
@@ -19,3 +18,4 @@ block content
     //-   +select('Tags', 'tags', '', '' )
     div
       input(type='submit' value='Submit')
+

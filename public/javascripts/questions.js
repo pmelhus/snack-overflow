@@ -3,7 +3,7 @@ let count = 0;
 
 let answerText = 'answers'
 
-window.addEventListener("DOMContentLoaded", ()=>{
+window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementsByClassName("form-field")
     const newForm = Array.from(form)
     const textArea = (newForm[0].children.body);
@@ -59,4 +59,3 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
 
 })
-

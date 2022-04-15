@@ -70,4 +70,22 @@ router.post(
   })
 );
 
+
+
+router.put(
+  '"/:id(\\d+)',
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const answer = await Answer.findByPk(id);
+
+    answer.body = req.body.body;
+    await answer.save();
+
+    res.json({
+      message: "Success",
+      answer,
+    });
+  })
+);
+
 module.exports = router;

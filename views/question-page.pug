@@ -32,6 +32,11 @@ block content
                 //- button: a(//- VOTE ROUTING -//) Downvote Answer
                 p(id='answerDate') answered at #{answer.created_at}
                 p(id='answerBody') #{answer.body}
+                if loggedInUser.id === answer.userId
+                    button(class='editButton' id=`edit-button-${answer.id}`) Edit
+                    form(class='hidden' id=`edit-form-${answer.id}`)
+                        textarea(name="content" id=`${answer.id}-edit-content`) #{answer.body}
+                        button(class="edit-submit" id=`edit-submit-${answer.id}`) Submit Edit
                 //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
                     button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer

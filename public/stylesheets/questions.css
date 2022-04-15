@@ -1,6 +1,12 @@
 html{
     font-family: sans-serif;
 }
+h1{
+    font-weight: 400;
+    font-size: 1.8rem;
+    margin: 0;
+    padding-top:5px
+}
 li{
     list-style: none;
 }
@@ -10,12 +16,31 @@ a{
     font-weight: 400;
     font-size: 1.2rem;
 }
+.a-display, .q-card-body p{
+    color: rgb(66, 65, 65)
+}
 #q-head{
     display: flex;
     justify-content: space-between;
 }
 
-#q-card{
+.q-card{
     display: flex;
     justify-content: left;
+    align-items: center;
+    padding: 16px;
+}
+
+.q-card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: right;
+}
+
+.q-card-body h2, .q-card-body p{
+    margin: 0px;
+    padding: 5px;
+    margin-left: 16px;
+
 }

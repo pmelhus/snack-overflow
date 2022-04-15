@@ -31,13 +31,14 @@ block content
     div(id="answer")
         each answer in answers
 
-         
-            div(id='a-card')
+
+            div(class='a-card')
 
                 //- button: a(//- VOTE ROUTING -//) Upvote Answer
                 //- p: #{answer.answerScore}
                 //- button: a(//- VOTE ROUTING -//) Downvote Answer
-                p(id='answerDate') answered at #{answer.createdAt}
+
+                p(id='answerDate') answered on #{answer.createdAt.toLocaleTimeString()} ||
                 p(id=`answerBody-${answer.id}`) #{answer.body}
                 if loggedInUser.id === answer.userId
                     button(class='editButton' id=`edit-button-${answer.id}`) Edit

@@ -19,24 +19,26 @@ html
                 button Forage!
           if authenticated
             li: a(href=`/users/${user.id}`) Profile
-            li: a(href='/users/logout') Logout
+            li(class='log-out-link'): a(href='/users/logout') Logout
           else
             li: a(href='/users/signup') Sign Up!
             li: a(href='/users/login') Login!
             //- li: p Welcome, #{user.userName}!
 
-    main(class='main-container')
-      div(id='left-nav-sidebar')
-        nav(role='navigation')
-          ol(class='nav-links')
-            li(class='home-nav')
-              a(id='nav-home' href='/')
-                span  Home
-            li(class='questions-nav')
-              a(id='nav-questions' href='/questions')
-                span Questions
-            li(class='users-nav')
-              a(id='nav-users' href='/users')
-                span Users
+    //- main(class='main-container')
+    //-   div(id='left-nav-sidebar')
+    //-     nav(role='navigation')
+    //-       ol(class='nav-links')
+    //-         li(class='home-nav')
+    //-           a(id='nav-home' href='/')
+    //-             span  Home
+    //-         li(class='questions-nav')
+    //-           a(id='nav-questions' href='/questions')
+    //-             span Questions
+    //-         li(class='users-nav')
+    //-           a(id='nav-users' href='/users')
+    //-             span Users
 
-      block content
+    //-   block content
+    main(id='main')
+    block content

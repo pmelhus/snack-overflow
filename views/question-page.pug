@@ -6,20 +6,32 @@ block styles
     script(src="/javascripts/questions.js" type="module" defer)
     script(src="/javascripts/answers.js" type="module" defer)
     link(rel="stylesheet" href="/stylesheets/question-page.css")
+    link(rel='stylesheet' href='/stylesheets/index.css')
 
 
 block content
-    div(id='question-container')
-        div(id='q-head')
-            h2(id=`question-${question.id}`) #{question.title}
-            p asked at #{question.createdAt}
-            button: a(href='./new') New Question
-        div
-            p #{question.body}
-            if user && (user.id === question.userId)
-                div
-                    button: a(href=`./${question.id}/edit`) Edit
-                    a(href=`/questions/${id}/delete`) Delete
+    //- div(id='question-container')
+    //-     div(id='q-head')
+    //-         h2(id=`question-${question.id}`) #{question.title}
+    //-         p asked at #{question.createdAt}
+    //-         button: a(href='./new') New Question
+    //-     div
+    //-         p #{question.body}
+    //-         if user && (user.id === question.userId)
+    //-             div
+    //-                 button: a(href=`./${question.id}/edit`) Edit
+    //-                 a(href=`/questions/${id}/delete`) Delete
+    body(style='')
+    div(style = 'padding-top:40px; padding-left: 30px' id='q-head')
+        h2(id=`question-${question.id}`) #{question.title}
+        p asked on #{question.createdAt}
+        a(id='ask-q' href='./new') New Question
+    div
+        p(class='question-body') #{question.body}
+        if user && (user.id === question.userId)
+            div
+                 button: a(href=`./${question.id}/edit`) Edit
+                 a(href=`/questions/${id}/delete`) Delete
 
         div(id="answerId")
             p(value="0") #{answers.length} answer
@@ -35,18 +47,18 @@ block content
                     //- p: #{answer.answerScore}
                     //- button: a(//- VOTE ROUTING -//) Downvote Answer
 
-                    p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()} ||
-                    p(id=`answerBody-${answer.id}`) #{answer.body}
-                    if user && (user.id === answer.userId)
-                    div(id='button-card')
+                p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()}
+                p(id=`answerBody-${answer.id}`) #{answer.body}
+                if user && (user.id === answer.userId)
+                  div(id='button-card')
                     button: a(id=`edit-a-${answer.id}`) Edit Answer
                     button: a(id=`delete-a-${answer.id}`) Delete Answer
 
-                    //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
-                        button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
-                        button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer
-        div(id='a-form')
-            p Your Answer
-            form(action='')
-                +textarea('Body', 'body', body)
-                button(id=`submit-answer`) New Answer
+                //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
+                    button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer
+                    button: a(href='questions/#{question.id}/answers/#{answer.id}/delete') Delete Answer
+    div(id='a-form')
+        p Your Answer
+        form(action='')
+            +textarea('Body', 'body', body)
+            button(id=`submit-answer`) New Answer

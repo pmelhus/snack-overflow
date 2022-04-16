@@ -7,11 +7,12 @@ block styles
     script(src="/javascripts/answers.js" type="module" defer)
     link(rel="stylesheet" href="/stylesheets/questions.css")
     link(rel='stylesheet' href='/stylesheets/index.css')
+
 block content
     div(id='q-body')
         div(id='q-head')
             h1 Questions
-            button(id='ask-q'): a(href='/questions/new') Ask question
+            a(id='ask-q' href='/questions/new') Ask question
         ul
             each question in questions
                 li

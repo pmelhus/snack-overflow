@@ -13,7 +13,7 @@ block content
     body(style='')
     div(style = 'padding-top:40px; padding-left: 30px' id='q-head')
         h2(id=`question-${question.id}`) #{question.title}
-        p asked on #{question.createdAt}
+        p asked on #{question.createdAt.toDateString()}
         a(id='ask-q' href='./new') New Question
     div
         p(class='question-body') #{question.body}

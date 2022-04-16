@@ -17,6 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
     //works
     const answerCount = document.getElementById('answerId')
   //works
+    const buttonCard = document.querySelectorAll('#button-card')
     const buttonCards = document.querySelectorAll('.a-card');
     const answerCards = Array.from(answerList.children)
     const answerCardsArray = answerCards.map(card => card.id.split('-')[2])
@@ -158,10 +159,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     })
-    buttonCards.forEach(buttonCard => {
-        const buttonGroups = buttonCard.children;
-        const editButton = buttonGroups[3];
-        const deleteButton = buttonGroups[4];
+    buttonCard.forEach(card => {
+        console.log(card)
+        const buttonGroups = card.children;
+        const editButton = buttonGroups[0];
+        const deleteButton = buttonGroups[1];
         deleteButton.addEventListener('click', async (e) => {
             e.stopPropagation();
             const buttonId = e.target.id.split('-')[2]

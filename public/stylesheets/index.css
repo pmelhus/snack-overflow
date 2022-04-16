@@ -55,3 +55,6 @@ h1 {
     width: 250px;
     padding: 4px 20px 3px 5px;
 }
+.main-container {
+    width: 100%;
+}

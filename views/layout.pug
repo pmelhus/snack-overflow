@@ -7,7 +7,7 @@ html
     link(rel='stylesheet' href='/stylesheets/index.css')
 
 
-  body
+  body(class = 'overall-layout')
     header
       nav
         ul.top-bar-container
@@ -25,5 +25,17 @@ html
             li: a(href='/users/login') Login!
             //- li: p Welcome, #{user.userName}!
 
-    main
-    block content
+
+
+    main(class='main-container')
+      div(id='left-sidebar')
+        nav(role='navigation')
+          ol(class='nav-links')
+            li(class='home-nav')
+              a(id='nav-home' href='/') Home
+            li(class='questions-nav')
+              a(id='nav-questions') Questions
+            li(class='users-nav' href='/')
+              a(id='nav-users') Users
+
+      block content

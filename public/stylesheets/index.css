@@ -7,6 +7,12 @@ body{
     margin: 0px;
     padding: 0px;
     border: 0px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-height: 500px;
+    min-width: 1000px;
+    vertical-align: baseline;
 }
 li{
     list-style: none;
@@ -45,7 +51,7 @@ h1 {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
-    position: fixed;
+    position: sticky;
     top: 0px;
     margin: 0px;
     width: 100%;
@@ -56,5 +62,17 @@ h1 {
     padding: 4px 20px 3px 5px;
 }
 .main-container {
-    width: 100%;
+    min-height: 100%;
+    display: flex;
+    max-width: 1264px;
+}
+
+#left-nav-sidebar {
+    position: sticky;
+    width: 164px;
+    overflow-y: auto;
+    min-height: 100%;
+    flex-shrink: 0;
+    box-shadow: 1px 5px 5px black;
+    margin-left: 2px;
 }

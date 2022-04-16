@@ -9,7 +9,7 @@ html
 
   body(class = 'overall-layout')
     header
-      nav
+      nav(id='top-nav-bar')
         ul.top-bar-container
           li: a(href='/')
             | Snack
@@ -25,17 +25,18 @@ html
             li: a(href='/users/login') Login!
             //- li: p Welcome, #{user.userName}!
 
-
-
     main(class='main-container')
-      div(id='left-sidebar')
+      div(id='left-nav-sidebar')
         nav(role='navigation')
           ol(class='nav-links')
             li(class='home-nav')
-              a(id='nav-home' href='/') Home
+              a(id='nav-home' href='/')
+                span  Home
             li(class='questions-nav')
-              a(id='nav-questions') Questions
-            li(class='users-nav' href='/')
-              a(id='nav-users') Users
+              a(id='nav-questions' href='/questions')
+                span Questions
+            li(class='users-nav')
+              a(id='nav-users' href='/users')
+                span Users
 
       block content

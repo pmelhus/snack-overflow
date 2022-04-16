@@ -45,10 +45,13 @@ h1 {
     flex-flow: row nowrap;
     justify-content: space-between;
     position: fixed;
-    top: 5px;
+    padding: 5px;
     margin: 0px;
     width: 94.8%;
     height: 25px;
+    overflow: hidden;
+    background-color: white;
+    z-index: 1;
 }
 .search-bar {
     width: 250px;

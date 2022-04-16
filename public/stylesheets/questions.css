@@ -1,6 +1,6 @@
 html{
     font-family: sans-serif;
-    
+
 }
 h1{
     font-weight: 400;
@@ -21,7 +21,9 @@ a{
     color: rgb(66, 65, 65)
 }
 #q-body{
+    border-left: 1px solid lightgray;
     display: flex;
+    margin: 0;
     position: relative;
     flex-direction: column;
     justify-content: center;
@@ -29,6 +31,7 @@ a{
     top: 40px;
     left: 20px;
     width: 96%;
+
 }
 #q-head{
     display: flex;
@@ -61,8 +64,4 @@ a{
     border-radius: 3px;
     border: 0px;
 }
-#ask-q a{
-    color: white;
-    font-size: .75rem;
-    font-weight: 400;
-}
+

@@ -12,12 +12,11 @@ li{
     list-style: none;
 }
 a{
-    /* text-decoration: none; */
-    color: blue;
+    color: gray;
+    text-decoration: none;
     font-weight: 400;
     font-size: 1.2rem;
 }
-
 h1 {
     color: #555555;
 }
@@ -40,18 +39,26 @@ h1 {
     display: none
 }
 .top-bar-container {
-    height: 60px;
-    background-color: #ababab;
+    /* height: 60px; */
+    /* background-color: #ababab; */
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     position: fixed;
-    top: 0px;
+    top: 5px;
     margin: 0px;
-    width: 100%;
+    width: 94.8%;
     height: 25px;
 }
 .search-bar {
     width: 250px;
     padding: 4px 20px 3px 5px;
+}
+#ask-q{
+    padding: 10px;
+    background-color: cornflowerblue;
+    border-radius: 3px;
+    border: 0px;
+    font-size: small;
+    color: white;
 }

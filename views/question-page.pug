@@ -6,13 +6,14 @@ block styles
     script(src="/javascripts/questions.js" type="module" defer)
     script(src="/javascripts/answers.js" type="module" defer)
     link(rel="stylesheet" href="/stylesheets/question-page.css")
+    link(rel='stylesheet' href='/stylesheets/index.css')
 
 
 block content
     div(id='q-head')
         h2(id=`question-${question.id}`) #{question.title}
         p asked at #{question.createdAt}
-        button: a(href='./new') New Question
+        a(id='ask-q' href='./new') New Question
     div
         p #{question.body}
         if user && (user.id === question.userId)

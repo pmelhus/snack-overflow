@@ -23,8 +23,9 @@ a{
     align-items: center;
     width: 60%;
     margin-left: 20%;
+    margin-top: 10px;
     padding: 20px;
-    border: solid ;
+    border: solid lightgray .5px;
 }
 #a-form{
     display: flex;
@@ -60,4 +61,10 @@ a{
 
 #answer {
     border: solid black 1px;
+}
+
+#answerDate {
+    font-style: italic;
+    border-bottom: solid black .03px;
+
 }

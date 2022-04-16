@@ -17,6 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
     //works
     const answerCount = document.getElementById('answerId')
   //works
+    const buttonCard = document.querySelectorAll('#button-card')
     const buttonCards = document.querySelectorAll('.a-card');
     const answerCards = Array.from(answerList.children)
     const answerCardsArray = answerCards.map(card => card.id.split('-')[2])
@@ -26,7 +27,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const answerDisplay = answerCount.children[0]
     const answerListLength = parseInt(answerList.childNodes.length)
 
-    console.log(buttonCards)
 
     answerCount.children[0].value = answerListLength
 
@@ -159,13 +159,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     })
-    buttonCards.forEach(buttonCard => {
-        console.log(buttonCards, "this is buttonCards")
-        const buttonGroups = buttonCard.children;
-        console.log(buttonGroups, "this is buttongroups")
-        const editButton = buttonCard[2];
-        console.log('this is supposed to be editbutton', editButton)
-        const deleteButton = buttonCard[3];
+    buttonCard.forEach(card => {
+        console.log(card)
+        const buttonGroups = card.children;
+        const editButton = buttonGroups[0];
+        const deleteButton = buttonGroups[1];
         deleteButton.addEventListener('click', async (e) => {
             e.stopPropagation();
             const buttonId = e.target.id.split('-')[2]

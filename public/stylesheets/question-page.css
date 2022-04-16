@@ -13,6 +13,7 @@ a{
 #q-head{
     display: flex;
     justify-content: space-between;
+    margin-left: 50px;
 }
 
 .a-card{
@@ -32,3 +33,6 @@ a{
     align-items: center;
 }
 
+#question-container{
+    display: flex;
+}

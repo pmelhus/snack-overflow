@@ -7,7 +7,6 @@ body{
     margin: 0px;
     padding: 0px;
     border: 0px;
-    display: flex;
     flex-direction: column;
     box-sizing: border-box;
     min-height: 500px;
@@ -51,7 +50,7 @@ h1 {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
-    position: sticky;
+    position: fixed;
     top: 0px;
     margin: 0px;
     width: 100%;
@@ -65,10 +64,13 @@ h1 {
     min-height: 100%;
     display: flex;
     max-width: 1264px;
+    margin-top: 20px;
 }
 
 #left-nav-sidebar {
-    position: sticky;
+    display: flex;
+    justify-content: start;
+    position: fixed;
     width: 164px;
     overflow-y: auto;
     min-height: 100%;

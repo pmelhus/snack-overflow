@@ -151,7 +151,7 @@ router.post(
 );
 
 router.get(
-  "/:id(\\d+)/delete",
+  "/:id/delete",
   asyncHandler(async (req, res) => {
     const id = await req.params.id;
     res.render("delete-confirmation", { id });
@@ -159,7 +159,7 @@ router.get(
 );
 
 router.post(
-  "/:id(\\d+)/delete",
+  "/:id/delete",
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
     const question = await Question.findByPk(questionId);

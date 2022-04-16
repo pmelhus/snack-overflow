@@ -4,9 +4,13 @@ html{
     width: 100%;
 }
 body{
+    box-sizing: border-box;
     margin: 0px;
     padding: 0px;
     border: 0px;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
 }
 li{
     list-style: none;
@@ -26,6 +30,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 50px;
 }
 .form-field {
     display: flex;
@@ -51,7 +56,7 @@ h1 {
     height: 25px;
     overflow: hidden;
     background-color: whitesmoke;
-    z-index: 1;
+    z-index: 2;
     border-bottom: solid black 1px;
 }
 .search-bar {
@@ -69,4 +74,12 @@ h1 {
 
 .log-out-link {
     padding-right: 40px;
+}
+
+#top-nav-bar {
+    position: sticky;
+    z-index: 2;
+}
+#main {
+
 }

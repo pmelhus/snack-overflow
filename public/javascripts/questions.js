@@ -6,19 +6,31 @@ let key = null
 
 window.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementsByClassName("form-field")
+    //works
     const newForm = Array.from(form)
+    //works
     const textArea = (newForm[0].children.body);
+  //works
     const answerButton = document.getElementById('submit-answer')
+    //works
     const answerList = document.getElementById('answer')
+    //works
     const answerCount = document.getElementById('answerId')
-    const questionLinks = document.querySelectorAll('h2 > a')
-    const buttonCards = document.querySelectorAll('#button-card');
+  //works
+    const buttonCards = document.querySelectorAll('.a-card');
+    console.log(buttonCards[3])
     const answerCards = Array.from(answerList.children)
+    console.log()
     const answerCardsArray = answerCards.map(card => card.id.split('-')[2])
+    console.log()
     const lastElArray = [(answerCardsArray[answerCardsArray.length - 1])]
+    console.log()
     const lastEl = lastElArray.join('')
+    console.log()
     const newElementId = parseInt(lastEl) + 1;
+    console.log()
     const answerDisplay = answerCount.children[0]
+    console.log()
     const answerListLength = parseInt(answerList.childNodes.length)
 
 
@@ -103,10 +115,11 @@ window.addEventListener("DOMContentLoaded", () => {
         })
         //instant edit button
 
+        //!I AM HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         newEditButton.addEventListener('click', async (e)=>{
             e.stopPropagation();
             e.preventDefault();
-
             const buttonId = e.target.id.split('-')[2]
             textArea.id = `edit-box-${newId}`
             const answerCard = document.getElementById(`new-div-${newId}`);
@@ -151,8 +164,8 @@ window.addEventListener("DOMContentLoaded", () => {
     })
     buttonCards.forEach(buttonCard => {
         const buttonGroups = buttonCard.children;
-        const editButton = buttonGroups[0];
-        const deleteButton = buttonGroups[1];
+        const editButton = buttonGroups[3];
+        const deleteButton = buttonGroups[4];
         deleteButton.addEventListener('click', async (e) => {
             e.stopPropagation();
             const buttonId = e.target.id.split('-')[2]

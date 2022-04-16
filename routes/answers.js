@@ -46,7 +46,6 @@ router.post('/:id',validateAnswers, asyncHandler(async(req,res,next)=>{
 }))
 
 
-
 router.delete("/instant/:id", asyncHandler(async (req, res) => {
   const id = req.params.id
   const answer = await Answer.findByPk(id)

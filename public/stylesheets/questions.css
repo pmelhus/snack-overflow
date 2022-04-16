@@ -1,7 +1,3 @@
-html{
-    font-family: sans-serif;
-
-}
 h1{
     font-weight: 400;
     font-size: 1.8rem;
@@ -52,12 +48,12 @@ li{
     margin-left: 16px;
 
 }
-#ask-q{
+/* #ask-q{
     padding: 10px;
     background-color: cornflowerblue;
     border-radius: 3px;
     border: 0px;
-}
+} */
 
 h2 a{
     color: blue;

@@ -13,11 +13,19 @@ a{
 #q-head{
     display: flex;
     justify-content: space-between;
+    border: solid black 1px;
 }
 
 .a-card{
     display: flex;
-    justify-content: left;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 10px;
+    padding: 20px;
+    border: solid lightgray .5px;
 }
 #a-form{
     display: flex;
@@ -32,3 +40,35 @@ a{
     align-items: center;
 }
 
+.question-body{
+    display: flex;
+    width: 60%;
+    padding: 20px;
+    margin-left: 20%;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 17px;
+    border: solid black 1px;
+    border-radius: 6px;
+}
+
+#answerId {
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+
+}
+
+#answer {
+    border: solid black 1px;
+}
+
+#answerDate {
+    font-style: italic;
+    border-bottom: solid black .03px;
+
+}
+/* #ask-q{
+    height: 15px;
+    width:67px;
+} */

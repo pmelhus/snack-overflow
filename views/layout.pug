@@ -18,11 +18,13 @@ html
                 input(type='search' name='term' placeholder='What are you craving?' required)
                 button Forage!
           if authenticated
-            li: a(href=`/users/${user.id}`) Profile
-            li: a(href='/users/logout') Logout
+            div(id='nav-buttons')
+              li: a(href=`/users/${user.id}`) Profile
+              li(class='log-out-link'): a(href='/users/logout') Logout
           else
-            li: a(href='/users/signup') Sign Up!
-            li: a(href='/users/login') Login!
+            div(id='nav-buttons')
+              li: a(href='/users/signup') Sign Up!
+              li: a(href='/users/login') Login!
             //- li: p Welcome, #{user.userName}!
 
     main(id='main')

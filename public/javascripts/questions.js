@@ -205,6 +205,12 @@ window.addEventListener("DOMContentLoaded", () => {
                 })
                 })
                 const data = await res.json();
+                const newBody = document.getElementById(`answerBody-${buttonId}`)
+                newBody.innerText = data.updatedBody
+                newSubmitButton.remove();
+                const textArea = document.getElementById(`edit-box-${buttonId}`)
+                textArea.innerText = ' '
+                textArea.style = 'color:black;'
             })
         })
     })

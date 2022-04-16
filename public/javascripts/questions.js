@@ -26,6 +26,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const answerDisplay = answerCount.children[0]
     const answerListLength = parseInt(answerList.childNodes.length)
 
+    console.log(buttonCards)
 
     answerCount.children[0].value = answerListLength
 
@@ -159,9 +160,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
     })
     buttonCards.forEach(buttonCard => {
+        console.log(buttonCards, "this is buttonCards")
         const buttonGroups = buttonCard.children;
-        const editButton = buttonGroups[3];
-        const deleteButton = buttonGroups[4];
+        console.log(buttonGroups, "this is buttongroups")
+        const editButton = buttonCard[2];
+        console.log('this is supposed to be editbutton', editButton)
+        const deleteButton = buttonCard[3];
         deleteButton.addEventListener('click', async (e) => {
             e.stopPropagation();
             const buttonId = e.target.id.split('-')[2]

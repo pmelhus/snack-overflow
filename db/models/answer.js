@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Answer.associate = function(models) {
     Answer.belongsTo(models.Question, {foreignKey: "questionId"})
     Answer.belongsTo(models.User, {foreignKey:"userId"})
-    Answer.hasMany(models.AnswerVote, {foreignKey:"answerId"})
+    Answer.hasMany(models.AnswerVote, {foreignKey:"answerId", onDelete: 'CASCADE', hooks: 'true'})
   };
   return Answer;
 };

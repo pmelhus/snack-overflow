@@ -19,11 +19,11 @@ html
                 button Forage!
           if authenticated
             li: a(href=`/users/${user.id}`) Profile
-            li: a(href='/users/logout') Logout
+            li(class='log-out-link'): a(href='/users/logout') Logout
           else
             li: a(href='/users/signup') Sign Up!
             li: a(href='/users/login') Login!
             //- li: p Welcome, #{user.userName}!
 
-    main
+    main(id='main')
     block content

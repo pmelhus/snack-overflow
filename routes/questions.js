@@ -162,6 +162,7 @@ router.post(
   "/:id/delete",
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
+    console.log('------------',questionId,'----------------')
     const question = await Question.findByPk(questionId);
     question.destroy();
     res.redirect("/questions");

@@ -15,7 +15,7 @@ html
             | Snack
             bold Overfleaux
           li: form(action='/search' role='search')
-                input(type='search' name='term' placeholder='What are you craving?' required)
+                input#searchInput(type='search' name='term' placeholder='What are you craving?' required)
                 button Forage!
           if authenticated
             li: a(href=`/users/${user.id}`) Profile

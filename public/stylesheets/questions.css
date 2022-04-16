@@ -11,12 +11,6 @@ h1{
 li{
     list-style: none;
 }
-a{
-    text-decoration: none;
-    color: blue;
-    font-weight: 400;
-    font-size: 1.2rem;
-}
 .a-display, .q-card-body p{
     color: rgb(66, 65, 65)
 }
@@ -65,3 +59,8 @@ a{
     border: 0px;
 }
 
+h2 a{
+    color: blue;
+    font-weight: 300;
+    font-size: 1rem;
+}

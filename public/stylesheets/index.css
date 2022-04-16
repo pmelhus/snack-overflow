@@ -46,6 +46,7 @@ h1 {
     justify-content: space-between;
     position: fixed;
     padding: 5px;
+    padding-right: 500px;
     margin: 0px;
     width: 94.8%;
     height: 25px;
@@ -64,4 +65,8 @@ h1 {
     border: 0px;
     font-size: small;
     color: white;
+}
+#main{
+    position: absolute;
+    top: 35px
 }

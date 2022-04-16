@@ -14,6 +14,7 @@ const validateAnswers = [
 ];
 
 
+
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -44,8 +45,6 @@ router.post('/:id',validateAnswers, asyncHandler(async(req,res,next)=>{
   console.log(answer.id)
   res.json({"id":`${answer.id}`,"body":`${answer.body}`,"createdAt":`${answer.createdAt}`}) //add a status to this later?
 }))
-
-
 
 router.delete("/instant/:id", asyncHandler(async (req, res) => {
   const id = req.params.id

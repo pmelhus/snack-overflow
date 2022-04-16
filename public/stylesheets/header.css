@@ -1,0 +1,10 @@
+.top-bar-container {
+    height: 60px;
+    background-color: lightsalmon;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    position: fixed;
+    top: 0px;
+    margin: 0px;
+}

@@ -18,19 +18,12 @@ window.addEventListener("DOMContentLoaded", () => {
     const answerCount = document.getElementById('answerId')
   //works
     const buttonCards = document.querySelectorAll('.a-card');
-    console.log(buttonCards[3])
     const answerCards = Array.from(answerList.children)
-    console.log()
     const answerCardsArray = answerCards.map(card => card.id.split('-')[2])
-    console.log()
     const lastElArray = [(answerCardsArray[answerCardsArray.length - 1])]
-    console.log()
     const lastEl = lastElArray.join('')
-    console.log()
     const newElementId = parseInt(lastEl) + 1;
-    console.log()
     const answerDisplay = answerCount.children[0]
-    console.log()
     const answerListLength = parseInt(answerList.childNodes.length)
 
 
@@ -137,6 +130,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 textArray.push(e.data)
             })
 
+
             newSubmitButton.addEventListener('click', async (e) =>{
                 e.preventDefault();
                 e.stopPropagation();
@@ -153,8 +147,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 const textArea = document.getElementById(`edit-box-${newId}`)
                 const answerCard = document.getElementById(`new-div-${newId}`);
                 const answerCardItems = answerCard.children
+                // console.log(answerCardItems)
+                // console.log(answerCard.children[1])
                 answerCard.children[1].innerText = text
-                textArea.innerText = ''
+                textArea.innerText = ' '
                 textArea.style = 'color:black;'
                 newSubmitButton.remove()
              })

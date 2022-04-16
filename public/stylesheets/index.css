@@ -74,8 +74,14 @@ h1 {
     height: 15px;
 }
 #main{
+    min-width: 100%;
+    min-height: 100%;
+    margin: auto 0;
     position: absolute;
-    top: 35px
+    top: 35px;
+    display:flex;
+    justify-content: center;
+    align-items: start;
 }
 .log-out-link {
     padding-right: 40px;

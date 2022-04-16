@@ -1,7 +1,7 @@
 #login-page {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     overflow: scroll;
     top: 35px;
     min-height: 100%;
@@ -28,5 +28,3 @@
     display: flex;
     justify-content: center;
 }
-
-

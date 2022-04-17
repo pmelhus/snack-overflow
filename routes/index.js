@@ -18,6 +18,7 @@ router.get('/', asyncHandler(async(req, res, next)=>{
   }
 }));
 
+
 const searchResults = async(q) => {
   const questions = await Question.findAll({
     where: {
@@ -29,6 +30,7 @@ const searchResults = async(q) => {
   })
   return questions
 }
+
 
 router.get('/search?(\\w+)', asyncHandler(async(req, res, next) => {
   let query = req.url.split('=')[1].toString()

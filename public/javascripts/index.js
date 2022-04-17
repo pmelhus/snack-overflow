@@ -1,3 +1,4 @@
+
 window.addEventListener("DOMContentLoaded", (event)=>{
     const searchInput = document.getElementById('searchInput')
     searchInput.addEventListener('keyup', (e) => {
@@ -8,3 +9,4 @@ window.addEventListener("DOMContentLoaded", (event)=>{
             return routeURI
     })
 })
+

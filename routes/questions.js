@@ -7,6 +7,9 @@ const { asyncHandler, handleValidationErrors } = require("../utils");
 const csrfProtection = csrf({ cookie: true });
 const { requireAuth } = require("../auth");
 
+
+
+
 router.get(
   "/",
   asyncHandler(async (req, res) => {
@@ -14,7 +17,7 @@ router.get(
     let answers = questions.map(
       async (q) => await Answer.findAll({ where: { questionId: q.id } })
     );
-    console.log(questions.Answer);
+
     if (req.session.auth) {
       const user = await User.findByPk(req.session.auth.userId);
       res.render("questions", {
@@ -22,7 +25,7 @@ router.get(
         user,
         questions,
         answers,
-        authorization:req.session.auth 
+        authorization:req.session.auth
       });
     } else {
       res.render("questions", { questions, answers});
@@ -163,7 +166,6 @@ router.post(
   "/:id/delete",
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
-    console.log('------------',questionId,'----------------')
     const question = await Question.findByPk(questionId);
     question.destroy();
     res.redirect("/questions");

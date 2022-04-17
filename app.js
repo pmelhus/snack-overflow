@@ -1,3 +1,4 @@
+
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -13,8 +14,9 @@ const { restoreUser } = require("./auth");
 const app = express();
 const questionsRouter = require("./routes/questions");
 const answerRouter = require("./routes/answers");
+const { asyncHandler, handleValidationErrors } = require("./utils.js");
 
-//test please delete this
+
 // view engine setup
 app.set("view engine", "pug");
 app.use(logger("dev"));
@@ -34,24 +36,23 @@ app.use(
   })
 );
 
-console.log('=====================')
 app.use(express.urlencoded({ extended: false }));
-
 // create Session table if it doesn't already exist
 store.sync();
 app.use(restoreUser);
-app.use('/', indexRouter);
 app.use("/users", usersRouter);
 app.use("/questions", questionsRouter);
 app.use('/answers', answerRouter);
+app.use('/', indexRouter);
+
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use( (req, res, next)=> {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use((err, req, res, next) =>{
   // set locals, only providing error in development
 
   res.locals.message = err.message;
@@ -60,6 +61,17 @@ app.use(function (err, req, res, next) {
   // render the error page
   // res.status(err.status || 500);
   // res.render("error");
-});
+})
+
+// app.use( asyncHandler(async(req, res, next)=> {
+//   next(createError(404));
+// }));
+
+// app.use(asyncHandler(async (err, req, res, next) =>{
+//   res.locals.message = err.message;
+//   res.locals.error = req.app.get("env") === "development" ? err : {};
+//   res.render('404')
+// }))
+
 
 module.exports = app;

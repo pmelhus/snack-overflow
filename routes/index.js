@@ -19,17 +19,17 @@ router.get('/', asyncHandler(async(req, res, next)=>{
   }
 }));
 
-const searchResults = async(term) => {
-  const questions = await Question.findAll({
-    where: {
-      title: {
-        [Op.substring]: term
-      }
-    },
-    include: [Answer, User]
-  })
-  return questions
-}
+// const searchResults = async(term) => {
+//   const questions = await Question.findAll({
+//     where: {
+//       title: {
+//         [Op.substring]: term
+//       }
+//     },
+//     include: [Answer, User]
+//   })
+//   return questions
+// }
 
 // router.get(searchHelper, asyncHandler(async(req, res, next) => {
 //   let results = []

@@ -7,7 +7,7 @@ const { asyncHandler, handleValidationErrors } = require("../utils");
 const { loginUser, logoutUser, requireAuth } = require("../auth");
 const csrfProtection = csrf({ cookie: true });
 const bcrypt = require("bcryptjs");
-
+// console.log('=====================')
 const userValidators = [
   check("firstName")
     .exists({ checkFalsy: true })
@@ -71,10 +71,9 @@ const userValidators = [
 
 router.get('/', asyncHandler(async(req, res, next) =>{
   const users = await User.findAll()
-  const userQuestions = await Question.findAll({where: {userId: User.id }})
+  // const userQuestions = await Question.findAll({where: {userId: User.id }})
   res.render('users', {
-    users,
-    userQuestions
+    users
   })
 }))
 
@@ -82,7 +81,7 @@ router.get('/', asyncHandler(async(req, res, next) =>{
 router.get(
   "/signup",
   csrfProtection,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const user = await User.build();
     res.render("user-signup", {
       title: "Signup Form",
@@ -129,7 +128,7 @@ router.post(
 router.get(
   "/login",
   csrfProtection,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     res.render("user-login", {
       title: "Login",
       csrfToken: req.csrfToken(),
@@ -146,16 +145,12 @@ const loginValidators = [
     .withMessage("Please provide a value for password"),
 ];
 
-router.use((req,res,next)=> {
-  console.log("THE REQUEST IS IN USER ROUTER")
-  next()
-})
 
 router.post(
   "/login",
   csrfProtection,
   loginValidators,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const { userName, password } = req.body;
 
     const validatorErrors = validationResult(req);
@@ -201,16 +196,15 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler (async (req, res, next) => {
   res.render('user-profile', {title: `${user.userName}'s profile page`, user, questions, answers})
 }))
 
-router.get("/logout", (req, res) => {
+router.get("/logout", asyncHandler(async (req, res, next)=> {
   res.render("user-logout");
-});
+}));
 
-router.post("/logout", (req, res) => {
+router.post("/logout", asyncHandler(async (req, res, next)=> {
   logoutUser(req, res);
-  console.log("HEEERE" + req.params.id)
 
   res.redirect("/");
-});
+}));
 
 
 

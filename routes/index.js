@@ -2,8 +2,7 @@ const express = require('express');
 const { Op, sequelize } = require('sequelize')
 const router = express.Router();
 const { User, Question, Answer } = require('../db/models');
-const { asyncHandler } = require('../utils');
-const { searchHelper } = require('../public/javascripts/search')
+const { asyncHandler } = require('../utils')
 // const { requireAuth } = require('../auth')
 
 
@@ -19,30 +18,28 @@ router.get('/', asyncHandler(async(req, res, next)=>{
   }
 }));
 
-// const searchResults = async(term) => {
-//   const questions = await Question.findAll({
-//     where: {
-//       title: {
-//         [Op.substring]: term
-//       }
-//     },
-//     include: [Answer, User]
-//   })
-//   return questions
-// }
 
-// router.get(searchHelper, asyncHandler(async(req, res, next) => {
-//   let results = []
-//   const rawQuery = req.params.url.split('?q=')[1].toString()
-//   if (rawQuery.includes('%20')) {
-//     const spacedQuery = rawQuery.split(spacer).join(' ')
-//     results = await searchResults(spacedQuery)
-//   } else {
-//     results = await searchResults(rawQuery)
-//   }
-//   res.render('search', {title: 'Snack Search', results, rawQuery, spacedQuery})
-// }))
+const searchResults = async(q) => {
+  const questions = await Question.findAll({
+    where: {
+      title: {
+        [Op.substring]: q
+      }
+    },
+    include: [Answer, User]
+  })
+  return questions
+}
 
+
+router.get('/search?(\\w+)', asyncHandler(async(req, res, next) => {
+  let query = req.url.split('=')[1].toString()
+  if (query.includes('+')) {
+    query.replaceAll('+', ' ')
+  }
+  const results = await searchResults(query)
+  res.render('search', {title: 'Snack Search', results, query})
+}))
 
 
 module.exports = router;

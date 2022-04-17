@@ -3,7 +3,6 @@ html{
     text-decoration: none;
     max-height: auto;
     max-width: auto;
-    overflow: hidden;
 }
 body{
     box-sizing: border-box;
@@ -14,6 +13,8 @@ body{
     /* flex-direction: column; */
     max-height: auto;
     max-width: auto;
+    min-width: auto;
+    /* overflow: hidden; */
 }
 li{
     list-style: none;
@@ -51,12 +52,13 @@ h1 {
     /* background-color: #ababab; */
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
     justify-content: space-evenly;
-    position: sticky;
+    position: fixed;
     padding: 5px;
     padding-right: 0;
     margin: 0px;
-    max-width: 100%;
+    width: 100%;
     height: 25px;
     overflow: hidden;
     background-color: whitesmoke;
@@ -65,7 +67,7 @@ h1 {
 }
 .search-bar {
     width: 250px;
-    padding: 4px 20px 3px 5px;
+    padding: 4px 4px 3px 5px;
 }
 .ask-q{
     padding: 2px;
@@ -116,10 +118,11 @@ h1 {
 
 #left-nav-bar {
     box-sizing:border-box;
-    position: relative;
+    position: fixed;
     height: 1200px;
     box-shadow: 1px 1px black;
     padding: 10px;
+    margin-top: 20px;
 }
 
 #main-container{
@@ -154,4 +157,8 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: right;
+}
+
+#searchForm {
+    margin-top: 5px;
 }

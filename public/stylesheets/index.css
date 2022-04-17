@@ -91,6 +91,7 @@ h1 {
     top: 35px;
     margin-left: 150px;
     overflow-y: scroll;
+    padding-left: 50px;
 }
 .log-out-link {
     padding-right: 40px;

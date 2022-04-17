@@ -69,6 +69,16 @@ const userValidators = [
     }),
 ];
 
+router.get('/', asyncHandler(async(req, res, next) =>{
+  const users = await User.findAll()
+  const userQuestions = await Question.findAll({where: {userId: User.id }})
+  res.render('users', {
+    users,
+    userQuestions
+  })
+}))
+
+
 router.get(
   "/signup",
   csrfProtection,
@@ -201,5 +211,7 @@ router.post("/logout", (req, res) => {
 
   res.redirect("/");
 });
+
+
 
 module.exports = router;

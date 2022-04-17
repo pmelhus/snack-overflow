@@ -15,7 +15,7 @@ router.get('/', asyncHandler(async(req, res, next)=>{
     const user = await User.findByPk(userId)
     res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions  });
   }else{
-    res.render('questions', { title: 'Welcome to Snack Overfleaux!', questions });
+    res.render('index', { title: 'Welcome to Snack Overfleaux!', questions });
   }
 }));
 

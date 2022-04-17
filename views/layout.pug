@@ -26,6 +26,20 @@ html
               li: a(href='/users/signup') Sign Up!
               li: a(href='/users/login') Login!
             //- li: p Welcome, #{user.userName}!
-
-    main(id='main')
-      block content
+    div(id='main-container')
+      nav(id='left-nav-bar')
+        ul.leftNavUl
+          a(href='/')
+            div
+              li Home
+          a(href='/questions')
+            div
+              li Questions
+          a(href='/users')
+            div
+              li Users
+          a(href='/developers')
+            div
+              li Developers
+      main(id='main')
+        block content

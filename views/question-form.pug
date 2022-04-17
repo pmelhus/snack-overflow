@@ -1,20 +1,23 @@
 extends layout.pug
+
 include utils.pug
 
 block styles
   link(rel="stylesheet" href="/stylesheets/question-form.css")
+  link(rel='stylesheet' href='/stylesheets/index.css')
 
 block content
-  h1 Ask a question!
-  div
-    +validationErrorSummary
-  div(id='q-form')
-  form( action='/questions' method='POST')
-    div(id='title')
-      +field2('Title', 'title', 'e.g. How many oreo\'s are too many oreo\'s?', 'text')
+  div(id='mainContent')
+    h1 Ask a question!
     div
-      +textarea('Body', 'body', '', 'textarea')
-    //- div
-    //-   +select('Tags', 'tags', '', '' )
-    div
-      input(type='submit' value='Submit')
+      +validationErrorSummary
+    div(id='q-form')
+    form( action='/questions' method='POST')
+      div(id='title')
+        +field2('Title', 'title', 'e.g. How many oreo\'s are too many oreo\'s?', 'text')
+      div
+        +textarea('Body', 'body', '', 'textarea')
+      //- div
+      //-   +select('Tags', 'tags', '', '' )
+      div
+        input(type='submit' value='Submit')

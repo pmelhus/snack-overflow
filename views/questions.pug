@@ -17,20 +17,20 @@ block content
                 button(class='ask-q' onclick="location.href = '/questions/new';") Ask question
             else
                 button(class='ask-q' id='noAuthQuestion') Ask question
-        div(id='ulId')
-            ul
-                each question in questions
-                    li
-                        div(class='q-card')
-                            div(class='a-display')
-                                unless question.Answers.length ===  1
-                                    p #{question.Answers.length} answers
-                                else
-                                    p #{question.Answers.length} answer
+   
+        ul
+            each question in questions
+                li
+                    div(class='q-card')
+                        div(class='a-display')
+                            unless question.Answers.length ===  1
+                                p #{question.Answers.length} answers
+                            else
+                                p #{question.Answers.length} answer
 
-                            div(class='q-card-body')
-                                h2: a(href= `/questions/${question.id}`) #{question.title}
-                                p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
+                        div(class='q-card-body')
+                            h2: a(href= `/questions/${question.id}`) #{question.title}
+                            p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
 
         //- add button to add new question
         //- add button to add new answer

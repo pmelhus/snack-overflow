@@ -22,9 +22,10 @@ router.get(
         user,
         questions,
         answers,
+        authorization:req.session.auth 
       });
     } else {
-      res.render("questions", { questions, answers });
+      res.render("questions", { questions, answers});
     }
   })
 );
@@ -151,7 +152,7 @@ router.post(
 );
 
 router.get(
-  "/:id(\\d+)/delete",
+  "/:id/delete",
   asyncHandler(async (req, res) => {
     const id = await req.params.id;
     res.render("delete-confirmation", { id });
@@ -159,9 +160,10 @@ router.get(
 );
 
 router.post(
-  "/:id(\\d+)/delete",
+  "/:id/delete",
   asyncHandler(async (req, res) => {
     const questionId = parseInt(req.params.id, 10);
+    console.log('------------',questionId,'----------------')
     const question = await Question.findByPk(questionId);
     question.destroy();
     res.redirect("/questions");

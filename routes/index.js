@@ -14,7 +14,7 @@ router.get('/', asyncHandler(async(req, res, next)=>{
     const user = await User.findByPk(userId)
     res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions  });
   }else{
-    res.render('questions', { title: 'Welcome to Snack Overfleaux!', questions });
+    res.render('index', { title: 'Welcome to Snack Overfleaux!', questions });
   }
 }));
 
@@ -30,8 +30,6 @@ const searchResults = async(q) => {
   return questions
 }
 
-
-
 router.get('/search?(\\w+)', asyncHandler(async(req, res, next) => {
   let query = req.url.split('=')[1].toString()
   if (query.includes('+')) {
@@ -40,7 +38,6 @@ router.get('/search?(\\w+)', asyncHandler(async(req, res, next) => {
   const results = await searchResults(query)
   res.render('search', {title: 'Snack Search', results, query})
 }))
-
 
 
 module.exports = router;

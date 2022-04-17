@@ -1,5 +1,29 @@
-#login{
-    position: relative;
-    top: 25px;;
+#login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: scroll;
+    top: 35px;
+    min-height: 100%;
+    z-index: 0;
+    align-items: center;
 }
 
+#login {
+    top: 80px;
+    min-height: 500px;
+    width: 500px;
+}
+
+#loginForm {
+    margin: 0 auto;
+}
+
+#needSignUp {
+    color: blue;
+}
+
+#demoLogin {
+    display: flex;
+    justify-content: center;
+}

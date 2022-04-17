@@ -28,3 +28,11 @@ mixin select(labelName, fieldName, fieldValue, fieldType)
         select(name=fieldName)
             //- each tag in tags
                 option(value='#{tag.name}')
+
+
+mixin fieldCSS1(labelName, fieldName, fieldValue, fieldType, idValueLabel, idValueInput)
+    .form-field
+        label(id=idValueLabel for=fieldName)= labelName
+        input(type=fieldType name=fieldName value=fieldValue id=idValueInput)
+
+

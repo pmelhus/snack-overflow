@@ -6,5 +6,5 @@ window.addEventListener("DOMContentLoaded", (event)=>{
             const queryToURI = queryParams.toString()
             const routeURI = `/search?${queryToURI}`
             return routeURI
-        })
     })
+})

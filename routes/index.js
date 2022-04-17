@@ -31,17 +31,17 @@ const searchResults = async(term) => {
   return questions
 }
 
-router.get(searchHelper, asyncHandler(async(req, res, next) => {
-  let results = []
-  const rawQuery = req.params.url.split('?q=')[1].toString()
-  if (rawQuery.includes('%20')) {
-    const spacedQuery = rawQuery.split(spacer).join(' ')
-    results = await searchResults(spacedQuery)
-  } else {
-    results = await searchResults(rawQuery)
-  }
-  res.render('search', {title: 'Snack Search', results, rawQuery, spacedQuery})
-}))
+// router.get(searchHelper, asyncHandler(async(req, res, next) => {
+//   let results = []
+//   const rawQuery = req.params.url.split('?q=')[1].toString()
+//   if (rawQuery.includes('%20')) {
+//     const spacedQuery = rawQuery.split(spacer).join(' ')
+//     results = await searchResults(spacedQuery)
+//   } else {
+//     results = await searchResults(rawQuery)
+//   }
+//   res.render('search', {title: 'Snack Search', results, rawQuery, spacedQuery})
+// }))
 
 
 

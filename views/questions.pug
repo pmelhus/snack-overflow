@@ -3,6 +3,7 @@ extends layout.pug
 include utils.pug
 
 block styles
+    script(src="/javascripts/allQuestions.js" type="module" defer)
     script(src="/javascripts/questions.js" type="module" defer)
     script(src="/javascripts/answers.js" type="module" defer)
     link(rel="stylesheet" href="/stylesheets/questions.css")
@@ -11,21 +12,25 @@ block styles
 block content
     div(id='q-body')
         div(id='q-head')
-            h1 Questions
-            a(id='ask-q' href='/questions/new') Ask question
-        ul
-            each question in questions
-                li
-                    div(class='q-card')
-                        div(class='a-display')
-                            unless question.Answers.length ===  1
-                                p #{question.Answers.length} answers
-                            else
-                                p #{question.Answers.length} answer
+            h1(id='questions') Questions
+            if authorization
+                button(class='ask-q' onclick="location.href = '/questions/new';") Ask question
+            else
+                button(class='ask-q' id='noAuthQuestion') Ask question
+        div(id='ulId')
+            ul
+                each question in questions
+                    li
+                        div(class='q-card')
+                            div(class='a-display')
+                                unless question.Answers.length ===  1
+                                    p #{question.Answers.length} answers
+                                else
+                                    p #{question.Answers.length} answer
 
-                        div(class='q-card-body')
-                            h2: a(href= `/questions/${question.id}`) #{question.title}
-                            p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
+                            div(class='q-card-body')
+                                h2: a(href= `/questions/${question.id}`) #{question.title}
+                                p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
 
         //- add button to add new question
         //- add button to add new answer

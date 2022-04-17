@@ -4,9 +4,13 @@ html{
     width: 100%;
 }
 body{
+    /* box-sizing: border-box; */
     margin: 0px;
     padding: 0px;
     border: 0px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    max-height: 100%;
 }
 li{
     list-style: none;
@@ -26,6 +30,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 50px;
 }
 .form-field {
     display: flex;
@@ -59,22 +64,35 @@ h1 {
     width: 250px;
     padding: 4px 20px 3px 5px;
 }
-#ask-q{
-    padding: 10px;
+.ask-q{
+    padding: 2px;
     background-color: cornflowerblue;
     border-radius: 3px;
     border: 0px;
     font-size: small;
     color: white;
-    height: 15px;
+    height: 28px;
+    margin-top: 4px;
 }
+
 #main{
+    justify-content: center;
+    min-width: 1000px;
+    min-height: 1000px;
+    margin: auto 0;
     position: absolute;
-    top: 35px
+    top: 35px;
 }
 .log-out-link {
     padding-right: 40px;
 }
+
+#top-nav-bar {
+    position: sticky;
+    z-index: 2;
+}
+
+
 #nav-buttons{
     display: flex;
     flex-direction: row;

@@ -69,12 +69,20 @@ const userValidators = [
     }),
 ];
 
+
 router.get('/', asyncHandler(async(req, res, next) =>{
   const users = await User.findAll()
-  // const userQuestions = await Question.findAll({where: {userId: User.id }})
+  if (Question.userId) {
+  const userQuestions = await Question.findAll({where: {userId: User.id }})
   res.render('users', {
-    users
+    users,
+    userQuestions
   })
+} else {
+  res.render('users', {
+    users,
+  })
+}
 }))
 
 
@@ -161,7 +169,12 @@ router.post(
       const user = await User.findOne({ where: { userName } });
 
       if (user !== null) {
-
+        if (user.userName === 'demoUser') {
+          if (password === user.hashedPassword.toString()) {
+            loginUser(req, res, user)
+            res.redirect('/questions')
+          }
+        } else {
         const passwordMatch = await bcrypt.compare(
           password,
           user.hashedPassword.toString()
@@ -174,6 +187,7 @@ router.post(
           res.redirect("/questions");
         }
       }
+    }
       errors.push("Login failed for the provided username and password");
     } else {
       errors = validatorErrors.array().map((error) => error.msg);

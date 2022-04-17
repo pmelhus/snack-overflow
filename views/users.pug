@@ -4,6 +4,7 @@ include utils.pug
 
 block styles
     link(rel='stylesheet' href='/stylesheets/index.css')
+    link(rel='stylesheet' href='/stylesheets/users.css')
 
 block content
     div(id='users-body')
@@ -16,6 +17,10 @@ block content
                     div(class='user-card')
 
                         div(class='user-card-body')
-                            h2: a(href= `/users/${user.id}`) #{user.userName}
-                            //- p User score: #{user.userScore}
-                            //- p Questions asked: #{userQuestions.length}
+                            a(href= `/users/${user.id}`)
+                                div(id='userCard')
+                                    h2 #{user.firstName} #{user.lastName}
+                                    h3 #{user.userName}
+                                    p User score: #{user.userScore}
+                                if userQuestions
+                                    p Questions asked: #{userQuestions.length}

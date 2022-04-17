@@ -16,7 +16,7 @@ block content
                 +fieldCSS1('Password:', 'password', password, 'password')
                 div(id='signUpButtons')
                     button.user-form-button(id="loginButton") Log In!
-                    button.user-form-button(id='cancelButton') Cancel
+                    button.user-form-button(id='cancelButton' onclick="location.href='/" type='button') Cancel
                 a(href='/users/signup' id='needSignUp') Need to sign up?
 
             form(action='/users/login' method='POST' id='demoLogin')

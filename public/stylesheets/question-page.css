@@ -13,13 +13,24 @@ a{
 #q-head{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border: solid black 1px;
-}
+    justify-self: center;
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 5px;
 
+}
+#q-head *{
+    padding: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 .a-card{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    justify-self: center;
     align-items: center;
     width: 60%;
     margin-left: 20%;
@@ -32,12 +43,14 @@ a{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    justify-self: center;
 }
 #a-form form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    justify-self: center;
 }
 
 .question-body{
@@ -56,11 +69,13 @@ a{
     display: flex;
     justify-content: center;
     font-style: italic;
-
+    justify-self: center;
+    margin: 0 auto;
 }
 
 #answer {
     border: solid black 1px;
+    margin: 0 auto;
 }
 
 #answerDate {

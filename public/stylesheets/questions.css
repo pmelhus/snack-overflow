@@ -47,7 +47,7 @@ li{
     align-items: right;
 }
 
-.q-card-body h2, .q-card-body p{
+.q-card-body details, .q-card-body p{
     margin: 0px;
     padding: 5px;
     margin-left: 16px;

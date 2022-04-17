@@ -17,7 +17,7 @@ block content
                 button(class='ask-q' onclick="location.href = '/questions/new';") Ask question
             else
                 button(class='ask-q' id='noAuthQuestion') Ask question
-   
+
         ul
             each question in questions
                 li
@@ -29,7 +29,9 @@ block content
                                 p #{question.Answers.length} answer
 
                         div(class='q-card-body')
-                            h2: a(href= `/questions/${question.id}`) #{question.title}
+                            details
+                                summary: a(href= `/questions/${question.id}`) #{question.title}
+                                p #{question.body}
                             p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
 
         //- add button to add new question

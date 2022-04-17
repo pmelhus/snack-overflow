@@ -10,8 +10,7 @@ block styles
 
 
 block content
-    body(style='')
-    div(style = 'padding-top:40px; padding-left: 30px' id='q-head')
+    div( id='q-head')
         h2(id=`question-${question.id}`) #{question.title}
         p asked on #{question.createdAt.toDateString()}
         a(id='ask-q' href='./new') New Question

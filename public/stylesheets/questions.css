@@ -7,7 +7,10 @@ h1{
 li{
     list-style: none;
 }
-.a-display, .q-card-body p{
+.a-display{
+    color: grey
+}
+.q-card-body p{
     color: rgb(66, 65, 65)
 }
 #q-body{
@@ -53,12 +56,11 @@ li{
     margin-left: 16px;
 
 }
-/* #ask-q{
-    padding: 10px;
-    background-color: cornflowerblue;
-    border-radius: 3px;
-    border: 0px;
-} */
+.q-title{
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: blue;
+}
 
 h2 a{
     color: blue;

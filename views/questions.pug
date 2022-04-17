@@ -30,7 +30,7 @@ block content
 
                         div(class='q-card-body')
                             details
-                                summary: a(href= `/questions/${question.id}`) #{question.title}
+                                summary: a(href= `/questions/${question.id}` class='q-title') #{question.title}
                                 p #{question.body}
                             p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
 

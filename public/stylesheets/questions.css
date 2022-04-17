@@ -26,6 +26,8 @@ li{
 #q-head{
     display: flex;
     justify-content: space-between;
+    max-width: 1000px;
+    min-width: 800px;
 }
 
 .q-card{
@@ -59,4 +61,8 @@ h2 a{
     color: blue;
     font-weight: 300;
     font-size: 1rem;
+}
+
+#ulId {
+    z-index: 0;
 }

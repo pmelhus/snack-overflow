@@ -22,9 +22,10 @@ router.get(
         user,
         questions,
         answers,
+        authorization:req.session.auth 
       });
     } else {
-      res.render("questions", { questions, answers });
+      res.render("questions", { questions, answers});
     }
   })
 );

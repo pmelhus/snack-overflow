@@ -64,18 +64,21 @@ h1 {
     width: 250px;
     padding: 4px 20px 3px 5px;
 }
-#ask-q{
-    padding: 10px;
+.ask-q{
+    padding: 2px;
     background-color: cornflowerblue;
     border-radius: 3px;
     border: 0px;
     font-size: small;
     color: white;
-    height: 15px;
+    height: 28px;
+    margin-top: 4px;
 }
+
 #main{
-    min-width: 100%;
-    min-height: 100%;
+    justify-content: center;
+    min-width: 1000px;
+    min-height: 1000px;
     margin: auto 0;
     position: absolute;
     top: 35px;

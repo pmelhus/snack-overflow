@@ -5,8 +5,10 @@ include utils.pug
 block styles
     script(src="/javascripts/questions.js" type="module" defer)
     script(src="/javascripts/answers.js" type="module" defer)
+    script(src="/javascripts/question-page.js" type="module" defer)
     link(rel="stylesheet" href="/stylesheets/question-page.css")
     link(rel='stylesheet' href='/stylesheets/index.css')
+
 
 
 block content
@@ -51,4 +53,7 @@ block content
                 p Your Answer
                 form(action='')
                     +textarea('', 'body', body)
-                    button(id=`submit-answer`) New Answer
+                    if authorization
+                        button(id=`submit-answer`) New Answer
+                    else
+                        button(id=`submit-answer-noAuth` type='button') New Answer

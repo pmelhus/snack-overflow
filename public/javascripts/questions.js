@@ -41,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     //posting and dynamically delete most recent answer
+if (answerButton) {
     answerButton.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -159,6 +160,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     })
+}
     buttonCard.forEach(card => {
         console.log(card)
         const buttonGroups = card.children;

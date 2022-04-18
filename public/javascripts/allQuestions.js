@@ -4,10 +4,11 @@ const askQuestionsButton = document.querySelector('#noAuthQuestion')
 
 
 askQuestionsButton.addEventListener('click', e => {
+  e.preventDefault()
   const errorMsg = document.createElement('div')
   const questions = document.getElementById('questions')
   errorMsg.id = 'errorMsgQuestion'
-  errorMsg.style.height = '15px'
+  errorMsg.style.height = '13px'
   errorMsg.style.marginLeft = '50%'
   errorMsg.style.top = '80px'
   errorMsg.style.fontSize = '14px'

@@ -160,17 +160,18 @@ router.post(
   loginValidators,
   asyncHandler(async (req, res, next) => {
     const { userName, password } = req.body;
-
+    console.log('====================== ENTERS POST')
     const validatorErrors = validationResult(req);
     let errors = [];
 
     if (validatorErrors.isEmpty()) {
 
       const user = await User.findOne({ where: { userName } });
-
+      console.log('====================== AFTER USER')
       if (user !== null) {
         if (user.userName === 'demoUser') {
           if (password === user.hashedPassword.toString()) {
+            console.log('====================== AFTER TOSTRING')
             loginUser(req, res, user)
             res.redirect('/questions')
           }

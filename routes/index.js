@@ -10,10 +10,10 @@ const { asyncHandler } = require('../utils')
 router.get('/', asyncHandler(async(req, res, next)=>{
   let questions;
   let user;
-  console.log(req)
+
   if (req.session.auth) {
     const {userId} = req.session.auth
-
+    questions = await Question.findAll({include:[Answer, User]})
     user = await User.findByPk(userId)
     res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions, authorization:req.session.auth  });
   }

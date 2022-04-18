@@ -2,17 +2,19 @@ extends layout.pug
 
 include utils.pug
 
+block styles
+  link(rel="stylesheet" href="/stylesheets/question-form.css")
+  link(rel='stylesheet' href='/stylesheets/index.css')
+
 block content
+
   h1 Edit your question!
-  div
+  div(id='mainContent')
     +validationErrorSummary
-  div
-  form(action=`/questions/${question.id}/edit` method='POST')
-    div
+  form(id='q-form' action=`/questions/${question.id}/edit` method='POST')
+    div(id='title')
       +field2('Title', 'title', question.title, 'text')
-    div
+    div(id='body')
       +textarea('Body', 'body', question.body)
-    //- div
-    //-   +select('Tags', 'tags', '', '' )
     div
       input(type='submit' value='Submit')

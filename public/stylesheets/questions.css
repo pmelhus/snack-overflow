@@ -14,19 +14,17 @@ li{
     color: rgb(66, 65, 65)
 }
 #q-body{
-    border-left: 1px solid lightgray;
     display: flex;
     position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: left;
-    top: 10px;
     left: 20px;
     width: 96%;
     height: 100%;
     padding: 10px;
-
-
+    padding-top: 0px;
+    border-left: 2px solid orange;
 }
 #q-head{
     display: flex;

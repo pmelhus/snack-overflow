@@ -1,5 +1,5 @@
 html{
-    font-family: sans-serif;
+    font-family: monospace;
     text-decoration: none;
     max-height: auto;
     max-width: auto;
@@ -118,7 +118,7 @@ h1 {
     box-sizing:border-box;
     position: relative;
     height: 1200px;
-    box-shadow: 1px 1px black;
+    /* box-shadow: 1px 1px black; */
     padding: 10px;
 }
 

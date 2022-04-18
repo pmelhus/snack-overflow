@@ -11,13 +11,10 @@ block content
     h1 Ask a question!
     div
       +validationErrorSummary
-    div(id='q-form')
-    form( action='/questions' method='POST')
+    form(id='q-form' action='/questions' method='POST')
       div(id='title')
-        +field2('Title', 'title', 'e.g. How many oreo\'s are too many oreo\'s?', 'text')
-      div
-        +textarea('Body', 'body', '', 'textarea')
-      //- div
-      //-   +select('Tags', 'tags', '', '' )
+        +field2('Title:', 'title', 'e.g. How many oreo\'s are too many oreo\'s?', 'text')
+      div(id='body')
+        +textarea('Body:', 'body', '', 'textarea')
       div
         input(type='submit' value='Submit')

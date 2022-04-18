@@ -13,8 +13,11 @@ router.get('/', asyncHandler(async(req, res, next)=>{
   console.log(req)
   if (req.session.auth) {
     const {userId} = req.session.auth
+
     user = await User.findByPk(userId)
+    res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions, authorization:req.session.auth  });
   }
+  
   if (req.query.term){
     let query = req.query.term.toString().split('+').join(' ')
     console.log(query)
@@ -28,13 +31,13 @@ router.get('/', asyncHandler(async(req, res, next)=>{
       include: [Answer, User],
       order: [['createdAt', 'DESC']]
     })
-    res.render('search', {title: 'Snack Search', user, questions, query})
+    res.render('search', {title: 'Snack Search', user, questions, query, authorization:req.session.auth })
   } else {
     questions = await Question.findAll({
         include: [Answer, User],
         order: [['createdAt', 'DESC']]
       });
-    res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions });
+    res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions, authorization:req.session.auth  });
   }
 }))
 

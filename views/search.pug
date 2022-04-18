@@ -1,14 +1,14 @@
 extends layout.pug
 
-block styles
+block append styles
     script(async src='/javascripts/index' type='module')
 
 
 block content
-    if results.length > 0
+    if questions.length > 0
         div(id='q-head')
             h1 Search results for
-            h2 "#{query}"
+            h2= query
         div
             ul
                 each question in results

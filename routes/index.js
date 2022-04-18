@@ -8,38 +8,39 @@ const { asyncHandler } = require('../utils')
 
 /* GET home page. */
 router.get('/', asyncHandler(async(req, res, next)=>{
-  const questions = await Question.findAll( {include: [Answer, User]});
+  let questions;
+  let user;
+  console.log(req)
   if (req.session.auth) {
     const {userId} = req.session.auth
-    const user = await User.findByPk(userId)
+
+    user = await User.findByPk(userId)
     res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions, authorization:req.session.auth  });
-  }else{
-    res.render('index', { title: 'Welcome to Snack Overfleaux!', questions });
   }
-}));
+  
+  if (req.query.term){
+    let query = req.query.term.toString().split('+').join(' ')
+    console.log(query)
 
-
-const searchResults = async(q) => {
-  const questions = await Question.findAll({
-    where: {
-      title: {
-        [Op.substring]: q
-      }
-    },
-    include: [Answer, User]
-  })
-  return questions
-}
-
-
-router.get('/search?(\\w+)', asyncHandler(async(req, res, next) => {
-  let query = req.url.split('=')[1].toString()
-  if (query.includes('+')) {
-    query.replaceAll('+', ' ')
+    questions = await Question.findAll({
+      where: {
+        title: {
+          [Op.substring]: query
+        }
+      },
+      include: [Answer, User],
+      order: [['createdAt', 'DESC']]
+    })
+    res.render('search', {title: 'Snack Search', user, questions, query, authorization:req.session.auth })
+  } else {
+    questions = await Question.findAll({
+        include: [Answer, User],
+        order: [['createdAt', 'DESC']]
+      });
+    res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions, authorization:req.session.auth  });
   }
-  const results = await searchResults(query)
-  res.render('search', {title: 'Snack Search', results, query})
 }))
+
 
 
 module.exports = router;

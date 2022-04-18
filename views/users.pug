@@ -22,5 +22,5 @@ block content
                                     h2 #{user.firstName} #{user.lastName}
                                     h3 #{user.userName}
                                     p User score: #{user.userScore}
-                                //- if userQuestions
-                                //-     p Questions asked: #{userQuestions.length}
+                                if userQuestions
+                                    p Questions asked: #{userQuestions.length}

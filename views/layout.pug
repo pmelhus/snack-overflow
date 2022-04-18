@@ -14,7 +14,7 @@ html
           li: a(href='/')
             | Snack
             bold Overfleaux
-          li: form(action='/search' role='search')
+          li: form#searchForm(action='/' role='search')
                 input#searchInput(type='search' name='term' placeholder='What are you craving?' required)
                 button Forage!
           if authenticated
@@ -35,11 +35,11 @@ html
           a(href='/questions')
             div
               li Questions
-          //- a(href='/users')
-          //-   div
-          //-     li Users
-          //- a(href='/developers')
-          //-   div
-          //-     li Developers
+          a(href='/users')
+            div
+              li Users
+          a(href='/developers')
+            div
+              li Developers
       main(id='main')
         block content

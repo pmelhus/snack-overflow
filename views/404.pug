@@ -4,7 +4,7 @@ include utils.pug
 
 block content
     body
-        h1(style='padding-top:6%; display:flex; justify-content:center; align-contents:center;') UH-OH! IT LOOKS LIKE THIS PAGE DOES NOT EXIST!
+        h1(style='padding-top:6%; display:flex; justify-content:center; align-contents:center;') UH-OH!
         p(style="display:flex; justify-content:center; align-contents:center;") We apologize if you were looking for a specific page, but are seeing this error instead. It appears that this page was either deleted by the user, or taken down.
         p(style="display:flex; justify-content:center; align-contents:center;") Please attempt click the link the button below to be sent to the home page. Happy Snacking!
-        h1(style="display:flex; justify-content:center; align-contents:center;") 404
+        h1(style="display:flex; justify-content:center; align-contents:center;") #{err.message}

@@ -1,0 +1,9 @@
+.user-card-body {
+  box-shadow: 1px 1px 1px 1px gray;
+}
+
+#userCard {
+  padding: 10px;
+  width: 700px;
+  height: 150px;
+}

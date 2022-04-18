@@ -82,7 +82,7 @@ router.get('/', asyncHandler(async(req, res, next) =>{
   res.render('users', {
     users,
   })
-
+}
 }))
 
 

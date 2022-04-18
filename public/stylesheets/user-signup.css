@@ -1,0 +1,13 @@
+#signup-form{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  overflow: scroll;
+  top: 35px;
+  min-height: 100%;
+  z-index: 0;
+  align-items: center;
+}
+
+

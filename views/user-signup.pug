@@ -2,16 +2,23 @@ extends layout.pug
 
 include utils.pug
 
+block styles
+    link(rel='stylesheet' href='/stylesheets/user-signup.css')
+    link(rel='stylesheet' href='/stylesheets/index.css')
+    //- link(rel="stylesheet" href="/stylesheets/user-login.css")
+    //- script(src="/javascripts/signupForm.js" type="module" defer)
+
 block content
-    +validationErrorSummary(errors)
-    form(action='/users/signup' method='POST')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        +field('First Name', 'firstName', user.firstName, 'text')
-        +field('Last Name', 'lastName', user.lastName, 'text')
-        +field('Username', 'userName', user.userName, 'text')
-        +field('Email', 'email', user.email, 'email')
-        +field('Password', 'password', user.password, 'password')
-        +field('Confirm Password', 'confirmPassword', user.confirmPassword, 'password')
-        button Sign Up!
-        button: a(href='/') Cancel
-        a(href='/users/login') Already a member?
+    div(id="signup-form")
+        +validationErrorSummary(errors)
+        form(action='/users/signup' method='POST' id='signup-form-ind-items')
+            input(type='hidden' name='_csrf' value=csrfToken)
+            +field('First Name', 'firstName', user.firstName, 'text')
+            +field('Last Name', 'lastName', user.lastName, 'text')
+            +field('Username', 'userName', user.userName, 'text')
+            +field('Email', 'email', user.email, 'email')
+            +field('Password', 'password', user.password, 'password')
+            +field('Confirm Password', 'confirmPassword', user.confirmPassword, 'password')
+            button Sign Up!
+            button(type='button' onclick="location.href = '/';" id='cancelButton') Cancel
+            a(href='/users/login') Already a member?

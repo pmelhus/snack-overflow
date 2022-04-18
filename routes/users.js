@@ -7,7 +7,7 @@ const { asyncHandler, handleValidationErrors } = require("../utils");
 const { loginUser, logoutUser, requireAuth } = require("../auth");
 const csrfProtection = csrf({ cookie: true });
 const bcrypt = require("bcryptjs");
-
+// console.log('=====================')
 const userValidators = [
   check("firstName")
     .exists({ checkFalsy: true })
@@ -69,10 +69,27 @@ const userValidators = [
     }),
 ];
 
+
+router.get('/', asyncHandler(async(req, res, next) =>{
+  const users = await User.findAll()
+  if (Question.userId) {
+  const userQuestions = await Question.findAll({where: {userId: User.id }})
+  res.render('users', {
+    users,
+    userQuestions
+  })
+} else {
+  res.render('users', {
+    users,
+  })
+}
+}))
+
+
 router.get(
   "/signup",
   csrfProtection,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const user = await User.build();
     res.render("user-signup", {
       title: "Signup Form",
@@ -119,7 +136,7 @@ router.post(
 router.get(
   "/login",
   csrfProtection,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     res.render("user-login", {
       title: "Login",
       csrfToken: req.csrfToken(),
@@ -136,27 +153,43 @@ const loginValidators = [
     .withMessage("Please provide a value for password"),
 ];
 
-router.use((req,res,next)=> {
-  console.log("THE REQUEST IS IN USER ROUTER")
-  next()
-})
+
+
+router.post('/demo/login', asyncHandler(async(req,res,next)=>{
+  console.log(req.body, 'THIS IS REQ************************')
+  const userName = req.body.userName
+  const password = req.body.password
+
+    const user = await User.findOne({ where: { userName } });
+    if (user !== null){
+      loginUser(req, res, user)
+      res.redirect('/questions')
+    }
+}))
+
 
 router.post(
   "/login",
   csrfProtection,
   loginValidators,
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const { userName, password } = req.body;
-
+    console.log('====================== ENTERS POST')
     const validatorErrors = validationResult(req);
     let errors = [];
 
     if (validatorErrors.isEmpty()) {
 
       const user = await User.findOne({ where: { userName } });
-
+      console.log('====================== AFTER USER')
       if (user !== null) {
-
+        if (user.userName === 'demoUser') {
+          if (password === user.hashedPassword.toString()) {
+            console.log('====================== AFTER TOSTRING')
+            loginUser(req, res, user)
+            res.redirect('/questions')
+          }
+        } else {
         const passwordMatch = await bcrypt.compare(
           password,
           user.hashedPassword.toString()
@@ -169,17 +202,18 @@ router.post(
           res.redirect("/questions");
         }
       }
+    }
       errors.push("Login failed for the provided username and password");
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
-    }
 
-    res.render("user-login", {
-      title: "Login",
-      userName,
-      errors,
-      csrfToken: req.csrfToken(),
-    });
+          res.render("user-login", {
+            title: "Login",
+            userName,
+            errors,
+            csrfToken: req.csrfToken(),
+    })
+    };
   })
 );
 
@@ -191,15 +225,16 @@ router.get('/:id(\\d+)', requireAuth, asyncHandler (async (req, res, next) => {
   res.render('user-profile', {title: `${user.userName}'s profile page`, user, questions, answers})
 }))
 
-router.get("/logout", (req, res) => {
+router.get("/logout", asyncHandler(async (req, res, next)=> {
   res.render("user-logout");
-});
+}));
 
-router.post("/logout", (req, res) => {
+router.post("/logout", asyncHandler(async (req, res, next)=> {
   logoutUser(req, res);
-  console.log("HEEERE" + req.params.id)
 
   res.redirect("/");
-});
+}));
+
+
 
 module.exports = router;

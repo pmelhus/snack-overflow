@@ -1,26 +1,33 @@
 //- extends layout.pug
 
-//- append styles
-//-     script(src='/javascripts/search' type='module' defer)
+block append styles
+    script(async src='/javascripts/index' type='module')
 
-//- block content
-//-     div(id='q-head')
-//-         h1 Search results for
-//-             unless rawQuery.includes('%20')
-//-                 h2= `"${rawQuery}"`
-//-             else
-//-                 h2= `"${spacedQuery}"`
-//-     div
-//-         ul
-//-             each question in results
-//-                 li
-//-                     div(class='q-card')
-//-                         div(class='a-display')
-//-                             unless question.Answers.length ===  1
-//-                                 p #{question.Answers.length} answers
-//-                             else
-//-                                 p #{question.Answers.length} answer
 
-//-                         div(class='q-card-body')
-//-                             h2: a(href= `/questions/${result.id}`) #{result.title}
-//-                             p Asked by #{result.User.userName} on #{result.createdAt.toDateString()}
+block content
+    if questions.length > 0
+        div(id='q-head')
+            h1 Search results for
+            h2= query
+        div
+            ul
+                each question in results
+                    li
+                        div(class='q-card')
+                            div(class='a-display')
+                                unless question.Answers.length ===  1
+                                    p #{question.Answers.length} answers
+                                else
+                                    p #{question.Answers.length} answer
+
+                            div(class='q-card-body')
+                                h2: a(href= `/questions/${result.id}`) #{result.title}
+                                p Asked by #{result.User.userName} on #{result.createdAt.toDateString()}
+    else
+        h2 Sorry!
+        h3 Your search returned no results...
+        p Others may have questions about the snack you're searching for, though! So,
+        a(href='questions/new') Click here
+        | to ask a question and add to our craving collection or
+        a(href='/questions') Click here
+        | to go back to our main page.

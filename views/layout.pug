@@ -9,12 +9,13 @@ html
 
   body
     header
-      nav
+      nav(id='top-nav-bar')
         ul.top-bar-container
+          li: img(src='images/snack-overfleaux.png' alt='Snack Overfleaux logo' width='32' length='32')
           li: a(href='/')
             | Snack
             bold Overfleaux
-          li: form(action='/search' role='search')
+          li: form#searchForm(action='/' role='search')
                 input#searchInput(type='search' name='term' placeholder='What are you craving?' required)
                 button Forage!
           if authenticated
@@ -26,6 +27,20 @@ html
               li: a(href='/users/signup') Sign Up!
               li: a(href='/users/login') Login!
             //- li: p Welcome, #{user.userName}!
-
-    main(id='main')
-      block content
+    div(id='main-container')
+      nav(id='left-nav-bar')
+        ul.leftNavUl
+          a(href='/')
+            div
+              li Home
+          a(href='/questions')
+            div
+              li Questions
+          a(href='/users')
+            div
+              li Users
+          //- a(href='/developers')
+          //-   div
+          //-     li Developers
+      main(id='main')
+        block content

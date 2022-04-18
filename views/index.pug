@@ -1,12 +1,14 @@
-extends layout
+extends layout.pug
 
-append head
-  //- add page specific styles by appending to the head
-  link(rel="stylesheet" href="/stylesheets/index.css")
+include utils.pug
 
-  //- add page specific js
-  script(src="/javascripts/index.js" type="module" defer)
+block styles
+
+    link(rel="stylesheet" href="/stylesheets/index.css")
+
+
+    //- script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  h1= title
-  p Welcome to Snack Overflow
+    h1= title
+    p Welcome to Snack Overflow

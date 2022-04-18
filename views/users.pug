@@ -1,0 +1,26 @@
+extends layout.pug
+
+include utils.pug
+
+block styles
+    link(rel='stylesheet' href='/stylesheets/index.css')
+    link(rel='stylesheet' href='/stylesheets/users.css')
+
+block content
+    div(id='users-body')
+        div(id='users-head')
+            h1(id='usersTitle') Users
+
+        ul
+            each user in users
+                li
+                    div(class='user-card')
+
+                        div(class='user-card-body')
+                            a(href= `/users/${user.id}`)
+                                div(id='userCard')
+                                    h2 #{user.firstName} #{user.lastName}
+                                    h3 #{user.userName}
+                                    p User score: #{user.userScore}
+                                if userQuestions
+                                    p Questions asked: #{userQuestions.length}

@@ -5,20 +5,23 @@ include utils.pug
 block styles
     link(rel="stylesheet" href="/stylesheets/user-login.css")
     link(rel='stylesheet' href='/stylesheets/index.css')
+    script(src="/javascripts/login.js" type="module" defer)
 
 block content
-    div(id='login')
-        +validationErrorSummary(errors)
-        form.user-forms( action='/users/login' method='POST')
-            input(type='hidden' name='_csrf' value=csrfToken)
-            +field('Username', 'userName', userName, 'text')
-            +field('Password', 'password', password, 'password')
-            button Log In!
-        button.user-form-button: a(href='/') Cancel
-        a(href='/users/signup') Need to sign up?
+    div(id='login-page')
+        div(id='login')
+            +validationErrorSummary(errors)
+            form.user-forms(id='loginForm' action='/users/login' method='POST')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                +fieldCSS1('Username:', 'userName', userName, 'text')
+                +fieldCSS1('Password:', 'password', password, 'password')
+                div(id='signUpButtons')
+                    button.user-form-button(id="loginButton") Log In!
+                    button.user-form-button(id='cancelButton' onclick="location.href='/'" type='button') Cancel
+                a(href='/users/signup' id='needSignUp') Need to sign up?
 
-         form( action='/users/login' method='POST')
-            input(type='hidden' name='_csrf' value=csrfToken)
-            input(type='hidden' name='userName' value='pmelhus')
-            input(type='hidden' name='password' value="Aaaaaaaa1!")
-            button Paul Log In!
+            form(action='/users/login' method='POST' id='demoLogin')
+                input(type='hidden' name='_csrf' value=csrfToken)
+                input(type='hidden' name='userName' value='demoUser')
+                input(type='hidden' name='password' value="DemoUserPassword123!")
+                button.user-form-button Demo Log In!

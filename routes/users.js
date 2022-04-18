@@ -206,14 +206,14 @@ router.post(
       errors.push("Login failed for the provided username and password");
     } else {
       errors = validatorErrors.array().map((error) => error.msg);
-    }
 
-    res.render("user-login", {
-      title: "Login",
-      userName,
-      errors,
-      csrfToken: req.csrfToken(),
-    });
+          res.render("user-login", {
+            title: "Login",
+            userName,
+            errors,
+            csrfToken: req.csrfToken(),
+    })
+    };
   })
 );
 

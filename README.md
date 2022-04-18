@@ -15,7 +15,7 @@ https://github.com/kmulloth
 ### Paul Melhus
 https://github.com/pmelhus
 
-** Special Thank you to Alec Keeler (Module Lead), Daniel Chin (Module Assistant), Rawaha Memon (Teaching Assistant), Raymond Nehring (Teaching Assistant).
+** Special Thank you to App Academy Teaching Staff:  Alec Keeler, Daniel Chin, Rawaha Memon, Raymond Nehring.
 
 They have helped us learn and grow as we continue our journey to become better full-stack engineers. We appreciate them for taking the time to be patient, understanding, and helpful with their teaching. We will miss them! <3
 
@@ -29,12 +29,12 @@ Snack-Overfleaux is supposed to mimic the functionality of Stack-Overflow. It is
 2. Install node_modules using 'npm install'
 3. In the root folder, create a '.env' file and use the '.env.example' file as a reference (you may copy and paste and use your own data)
 4. In your terminal use the following commands in this order:
- - 1. psql-create user snack_overflow_app with password 'password' createdb
- - 2. npx dotenv sequelize init
- ** data models,seed data, and associations have been completed for you **
-- 3. npx dotenv sequelize db:create
-- 4. npx dotenv sequelize db:migrate
-- 5. npx dotenv sequelize db:seed:all
+    - psql-create user snack_overflow_app with password 'password' createdb
+    - npx dotenv sequelize init
+    ** data models,seed data, and associations have been completed for you **
+    - npx dotenv sequelize db:create
+    - npx dotenv sequelize db:migrate
+    - npx dotenv sequelize db:seed:all
 5. In your terminal, type "npm start" to begin the server
 6. In your browser navigate to "http://localhost:8080/"
 

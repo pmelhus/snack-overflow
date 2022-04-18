@@ -11,22 +11,7 @@ a{
     font-size: 1.2rem;
 }
 
-#mainContent{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-self: center;
-}
 
-form #title, form #body{
-    display: flex;
-    padding: 3px;
-    font-size: 15px;
-    width: 100%;
-}
-form #title{
-    font-size: 1.5rem;
-}
 .form-field>textarea{
     width: 100%
 }

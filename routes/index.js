@@ -12,7 +12,7 @@ router.get('/', asyncHandler(async(req, res, next)=>{
   if (req.session.auth) {
     const {userId} = req.session.auth
     const user = await User.findByPk(userId)
-    res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions  });
+    res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions, authorization:req.session.auth  });
   }else{
     res.render('index', { title: 'Welcome to Snack Overfleaux!', questions });
   }

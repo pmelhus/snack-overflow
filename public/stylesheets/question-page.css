@@ -141,3 +141,8 @@ textarea {
 #a-form-card {
     width: 63.65%;
 }
+
+#errorMsgAnswer{
+    display: flex;
+    justify-content: start;
+}

@@ -72,17 +72,17 @@ const userValidators = [
 
 router.get('/', asyncHandler(async(req, res, next) =>{
   const users = await User.findAll()
-  if (Question.userId) {
-  const userQuestions = await Question.findAll({where: {userId: User.id }})
+//   if (Question.userId) {
+//   const userQuestions = await Question.findAll({where: {userId: User.id }})
+//   res.render('users', {
+//     users,
+//     userQuestions
+//   })
+// } else {
   res.render('users', {
     users,
-    userQuestions
   })
-} else {
-  res.render('users', {
-    users,
-  })
-}
+
 }))
 
 

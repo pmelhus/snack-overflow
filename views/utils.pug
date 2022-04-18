@@ -14,12 +14,12 @@ mixin field2(labelName, fieldName, fieldValue, fieldType)
     div
         label(for=fieldName)= labelName
     .form-field
-        input(type=fieldType name=fieldName value=fieldValue)
+        input(type=fieldType name=fieldName value=fieldValue style="width: 318px")
 
 mixin textarea(labelName, fieldName, fieldValue)
     .form-field
         label(for=fieldName) #{labelName}
-        textarea(name=fieldName) #{fieldValue}
+        textarea(name=fieldName style="width: 327px; height: 168px;") #{fieldValue}
 
 mixin select(labelName, fieldName, fieldValue, fieldType)
     div
@@ -34,5 +34,3 @@ mixin fieldCSS1(labelName, fieldName, fieldValue, fieldType, idValueLabel, idVal
     .form-field
         label(id=idValueLabel for=fieldName)= labelName
         input(type=fieldType name=fieldName value=fieldValue id=idValueInput)
-
-

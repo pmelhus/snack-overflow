@@ -154,6 +154,20 @@ const loginValidators = [
 ];
 
 
+
+router.post('/demo/login', asyncHandler(async(req,res,next)=>{
+  console.log(req.body, 'THIS IS REQ************************')
+  const userName = req.body.userName
+  const password = req.body.password
+
+    const user = await User.findOne({ where: { userName } });
+    if (user !== null){
+      loginUser(req, res, user)
+      res.redirect('/questions')
+    }
+}))
+
+
 router.post(
   "/login",
   csrfProtection,

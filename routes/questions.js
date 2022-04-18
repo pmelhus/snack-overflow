@@ -14,7 +14,6 @@ router.get(
     let answers = questions.map(
       async (q) => await Answer.findAll({ where: { questionId: q.id } })
     );
-    console.log(questions.Answer);
     if (req.session.auth) {
       const user = await User.findByPk(req.session.auth.userId);
       res.render("questions", {
@@ -22,7 +21,7 @@ router.get(
         user,
         questions,
         answers,
-        authorization:req.session.auth 
+        authorization:req.session.auth
       });
     } else {
       res.render("questions", { questions, answers});

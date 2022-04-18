@@ -1,17 +1,16 @@
 extends layout.pug
 
-block styles
+block append styles
     script(async src='/javascripts/index' type='module')
 
 
 block content
-    if results.length > 0
+    if questions.length > 0
         div(id='q-head')
-            h1 Search results for
-            h2 "#{query}"
+            h1 Search results for #{queryTerm}
         div
             ul
-                each question in results
+                each question in questions
                     li
                         div(class='q-card')
                             div(class='a-display')
@@ -21,13 +20,16 @@ block content
                                     p #{question.Answers.length} answer
 
                             div(class='q-card-body')
-                                h2: a(href= `/questions/${result.id}`) #{result.title}
-                                p Asked by #{result.User.userName} on #{result.createdAt.toDateString()}
+                                h2: a(href= `/questions/${question.id}`) #{question.title}
+                                p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
     else
         h2 Sorry!
         h3 Your search returned no results...
-        p Others may have questions about the snack you're searching for, though! So,
-        a(href='questions/new') Click here
-        | to ask a question and add to our craving collection or
-        a(href='/questions') Click here
-        | to go back to our main page.
+        p
+            | Others may have questions about the snack you're
+            #[br]
+            | searching for, though! So, #[a(href='questions/new') Click here] to
+            #[br]
+            | ask a question and add to our craving collection
+            #[br]
+            | or #[a(href='/questions') Click here] to go back to our main page.

@@ -1,42 +1,43 @@
 const express = require('express');
 const { Op, sequelize } = require('sequelize')
 const router = express.Router();
-const { User, Question, Answer } = require('../db/models');
+const { User, Question, Answer } = require('../db/models')
+
 const { asyncHandler } = require('../utils')
 // const { requireAuth } = require('../auth')
 
-
+const searchQuestions = async(term) => {
+  await Question.findAll({
+      where: {title: {[Op.substring]: term}},
+      include: [Answer, User],
+      order: [['createdAt', 'DESC']]
+  })
+}
 /* GET home page. */
 router.get('/', asyncHandler(async(req, res, next)=>{
-  const questions = await Question.findAll( {include: [Answer, User]});
   if (req.session.auth) {
     const {userId} = req.session.auth
     const user = await User.findByPk(userId)
-    res.render('questions', { title: 'Welcome to Snack Overfleaux!', user, questions  });
-  }else{
-    res.render('index', { title: 'Welcome to Snack Overfleaux!', questions });
+    const questions = await Question.findAll({include: [Answer, User], order: [['createdAt', 'DESC']]})
+    return res.render('questions', { title: 'Snack Overfleaux', user, questions  });
+  } else {
+    const questions = await Question.findAll({include: [Answer, User], order: [['createdAt', 'DESC']]})
+    return res.render('questions', { title: 'Snack Overfleaux', questions });
   }
 }));
 
-const searchResults = async(q) => {
-  const questions = await Question.findAll({
-    where: {
-      title: {
-        [Op.substring]: q
-      }
-    },
-    include: [Answer, User]
-  })
-  return questions
-}
-
-router.get('/search?(\\w+)', asyncHandler(async(req, res, next) => {
-  let query = req.url.split('=')[1].toString()
-  if (query.includes('+')) {
-    query.replaceAll('+', ' ')
+router.get('*', asyncHandler (async (req, res, next) => {
+  console.log('WE HIT THIS ONE! ==============================HERE')
+  const queryTerm = req.query.term.toString()
+  if (req.session.auth && req.query.term) {
+    const {userId} = req.session.auth
+    const user = await User.findByPk(userId)
+    const questions = searchQuestions(queryTerm)
+    return res.render('search', { title: 'Search Results', user, questions, queryTerm })
+  } else {
+    const questions = await Question.findAll({include: [Answer, User], order: [['createdAt', 'DESC']]})
+    return res.render('questions', { title: 'Snack Overfleaux', questions , authorization:req.session.auth });
   }
-  const results = await searchResults(query)
-  res.render('search', {title: 'Snack Search', results, query})
 }))
 
 

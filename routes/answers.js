@@ -13,8 +13,6 @@ const validateAnswers = [
     .withMessage("Answer Body can't be empty."),
 ];
 
-
-
 router.get(
   "/",
   asyncHandler(async (req, res) => {

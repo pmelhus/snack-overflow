@@ -34,20 +34,21 @@ block content
             each answer in answers
                 div(class='a-card' id=`answer-card-${answer.id}`)
 
-                    //- button: a(//- VOTE ROUTING -//) Upvote Answer
-                    //- p: #{answer.answerScore}
-                    //- button: a(//- VOTE ROUTING -//) Downvote Answer
-
-                    p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()}
-                    p(id=`answerBody-${answer.id}`) #{answer.body}
-                        form(class='hidden' id=`edit-form-${answer.id}`)
+                    p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()} by #{answer.User.userName}
+                    div(class='a-card-content')
+                        div(class='vote-buttons')
+                            button(class='upvote'): a(href='/votes/up') Upvote Answer
+                            p #{answer.answerScore}
+                            button(class='downvote'): a(href='/votes/down') Downvote Answer
+                        p(id=`answerBody-${answer.id}`) #{answer.body}
+                          form(class='hidden' id=`edit-form-${answer.id}`)
                             label Edit
                             textarea(type="text" name="body" id=`${answer.id}-edit-content`) #{answer.body}
                             button(class="edit-submit" id=`edit-submit-${answer.id}`) Submit Edit
-                    if user && (user.id === answer.userId)
+                        if user && (user.id === answer.userId)
                         div(id='button-card')
-                            button: a(id=`edit-a-${answer.id}`) Edit Answer
-                            button: a(id=`delete-a-${answer.id}`) Delete Answer
+                            button: a(id=`edit-a-${answer.id}`) Edit
+                            button: a(id=`delete-a-${answer.id}`) Delete
 
                     //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
                         button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer

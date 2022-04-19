@@ -59,7 +59,20 @@ textarea {
     padding: 20px;
     border: solid lightgray .5px;
 }
-
+.a-card-content{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 10px;
+    border: solid lightgray .5px;
+}
+.a-card-content div{
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}
 #a-form {
     display: flex;
     /* flex-direction: column; */
@@ -100,11 +113,7 @@ textarea {
     /* margin: 0 auto; */
 }
 
-#answer {
-    /* border: solid black 1px; */
-    /* margin: 0 auto; */
-    /* box-shadow: 1px 3px 3px grey; */
-}
+
 
 #answerDate {
     font-style: italic;
@@ -140,6 +149,10 @@ textarea {
 
 #a-form-card {
     width: 63.65%;
+}
+
+.vote-buttons p{
+    margin: 3px
 }
 
 #errorMsgAnswer{

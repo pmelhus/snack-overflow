@@ -123,6 +123,7 @@ h1 {
     /* box-shadow: 1px 1px black; */
     padding: 10px;
     margin-top: 20px;
+    left: 0;
 }
 
 #main-container{
@@ -177,4 +178,17 @@ form #title, form #body{
 }
 form #title{
     font-size: 1.5rem;
+}
+#logo{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+#logo img{
+    padding: 3px;
+}
+button{
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
 }

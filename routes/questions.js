@@ -10,9 +10,7 @@ const { requireAuth } = require("../auth");
 
 
 
-router.get(
-  "/",
-  asyncHandler(async (req, res) => {
+router.get("/",asyncHandler(async (req, res) => {
     const questions = await Question.findAll({ include: [Answer, User] });
     let answers = questions.map(
       async (q) => await Answer.findAll({ where: { questionId: q.id } })
@@ -87,6 +85,7 @@ router.get(
     const question = await Question.findByPk(id, { include: [Answer, User] });
     const answers = await Answer.findAll({
       where: { questionId: question.id },
+      include: [User]
     });
     const { questionId, body, answerScore, userId } = Answer;
     await Answer.build();

@@ -31,17 +31,17 @@ block content
         div(id="answer")
             each answer in answers
                 div(class='a-card' id=`answer-card-${answer.id}`)
-
-                    //- button: a(//- VOTE ROUTING -//) Upvote Answer
-                    //- p: #{answer.answerScore}
-                    //- button: a(//- VOTE ROUTING -//) Downvote Answer
-
-                    p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()}
-                    p(id=`answerBody-${answer.id}`) #{answer.body}
-                    if user && (user.id === answer.userId)
-                    div(id='button-card')
-                        button: a(id=`edit-a-${answer.id}`) Edit Answer
-                        button: a(id=`delete-a-${answer.id}`) Delete Answer
+                    p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()} by #{answer.User.userName}
+                    div(class='a-card-content')
+                        div(class='vote-buttons')
+                            button(class='upvote'): a(href='/votes/up') Upvote Answer
+                            p #{answer.answerScore}
+                            button(class='downvote'): a(href='/votes/down') Downvote Answer
+                        p(id=`answerBody-${answer.id}`) #{answer.body}
+                        if user && (user.id === answer.userId)
+                        div(id='button-card')
+                            button: a(id=`edit-a-${answer.id}`) Edit
+                            button: a(id=`delete-a-${answer.id}`) Delete
 
                     //- if answer.user_id == //-TODO: CURRENT USER FROM SESSION
                         button: a(href='questions/#{question.id}/answers/#{answer.id}/edit') Edit Answer

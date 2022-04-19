@@ -14,6 +14,7 @@ const { restoreUser } = require("./auth");
 const app = express();
 const questionsRouter = require("./routes/questions");
 const answerRouter = require("./routes/answers");
+const votesRouter = require("./routes/votes")
 const { asyncHandler, handleValidationErrors } = require("./utils.js");
 
 
@@ -40,6 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 // create Session table if it doesn't already exist
 store.sync();
 app.use(restoreUser);
+app.use("/votes", votesRouter);
 app.use("/users", usersRouter);
 app.use("/questions", questionsRouter);
 app.use('/answers', answerRouter);

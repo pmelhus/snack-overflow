@@ -97,6 +97,7 @@ router.get(
         answers,
         id,
         loggedInUser,
+        authorization:req.session.auth
       });
     } else {
       return res.render("question-page", {
@@ -104,6 +105,7 @@ router.get(
         question,
         answers,
         id,
+        authorization:req.session.auth
       });
     }
   })

@@ -19,20 +19,21 @@ block content
                 button(class='ask-q' id='noAuthQuestion') Ask question
 
         ul
-            each question in questions
-                li
-                    div(class='q-card')
-                        div(class='a-display')
-                            unless question.Answers.length ===  1
-                                p #{question.Answers.length} answers
-                            else
-                                p #{question.Answers.length} answer
+            if questions.length > 0
+                each question in questions
+                    li
+                        div(class='q-card')
+                            div(class='a-display')
+                                unless question.Answers.length ===  1
+                                    p #{question.Answers.length} answers
+                                else
+                                    p #{question.Answers.length} answer
 
-                        div(class='q-card-body')
-                            details
-                                summary: a(href= `/questions/${question.id}` class='q-title') #{question.title}
-                                p #{question.body}
-                            p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
+                            div(class='q-card-body')
+                                details
+                                    summary: a(href= `/questions/${question.id}` class='q-title') #{question.title}
+                                    p #{question.body}
+                                p Asked by #{question.User.userName} on #{question.createdAt.toDateString()}
 
         //- add button to add new question
         //- add button to add new answer

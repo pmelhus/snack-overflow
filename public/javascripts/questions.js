@@ -41,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     //posting and dynamically delete most recent answer
+if (answerButton) {
     answerButton.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -54,11 +55,13 @@ window.addEventListener("DOMContentLoaded", () => {
             })
         })
         const data = await res.json()
+        console.log(data)
         const newId = data.id
         const newBody = data.body
-        const createdAt = data.createdAt;
-
-
+        const createdAt = data.createdAt
+        let today = new Date()
+        let time = today.toLocaleTimeString()
+        let date = today.toLocaleDateString()
         const newDiv = document.createElement('div');
         const newAnswerAt = document.createElement('p')
         newAnswerAt.innerText = 'answered at'
@@ -66,6 +69,18 @@ window.addEventListener("DOMContentLoaded", () => {
         const buttonDiv = document.createElement('div');
         const newEditButton = document.createElement('button')
         const newDeleteButton = document.createElement('button')
+        // const createdAt = newAnswerAt.id.split('-')[1]
+        newDiv.style.display = 'flex'
+        newDiv.style.flexDirection = 'column'
+        newDiv.style.justifyContent = 'right'
+        newDiv.style.alignItems = 'center'
+        newDiv.style.width= '60%'
+        newDiv.style.marginTop= '10px'
+        newDiv.style.padding= '20px'
+        newDiv.style.border= 'solid lightgray .5px'
+        newAnswer.id= `answerBody-${newId}`
+        newAnswerAt.id= `answerDate-${createdAt}`
+        newAnswerAt.innerHTML = `answered at ${time}, ${date}`
         newAnswer.innerText = textArea.value;
         textArea.value = '';
         newDiv.id = `new-div-${newId}`
@@ -79,6 +94,8 @@ window.addEventListener("DOMContentLoaded", () => {
         newEditButton.id = `new-edit-button-${newId}`
         buttonDiv.appendChild(newEditButton)
         buttonDiv.appendChild(newDeleteButton)
+        newEditButton.class='editDeleteButtons'
+        newDeleteButton.class='editDeleteButtons'
         const answerListLength = parseInt(answerList.childNodes.length)
         const answerDisplay = answerCount.children[0]
         answerDisplay.value = answerListLength
@@ -107,6 +124,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
         })
+
         //instant edit button
 
         //!I AM HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -159,63 +177,81 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
     })
-    buttonCard.forEach(card => {
-        console.log(card)
-        const buttonGroups = card.children;
-        const editButton = buttonGroups[0];
-        const deleteButton = buttonGroups[1];
-        deleteButton.addEventListener('click', async (e) => {
-            e.stopPropagation();
-            const buttonId = e.target.id.split('-')[2]
-            const answerCard = document.getElementById(`answer-card-${buttonId}`);
-            const res = await fetch(`/answers/${buttonId}`, {
-                method: "DELETE",
-            })
-            answerCard.remove();
+}
+buttonCard.forEach(card => {
+    console.log(card)
+    const buttonGroups = card.children;
+    const editButton = buttonGroups[0];
+    const deleteButton = buttonGroups[1];
+    editButton.class = 'editDeleteButtons'
+    deleteButton.class = 'editDeleteButtons'
+    deleteButton.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const buttonId = e.target.id.split('-')[2]
+        const answerCard = document.getElementById(`answer-card-${buttonId}`);
+        const res = await fetch(`/answers/${buttonId}`, {
+            method: "DELETE",
         })
-        //EDIT BUTTON
-        editButton.addEventListener('click', async (e) => {
+        answerCard.remove();
+    })
+    //EDIT BUTTON
+    editButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const buttonId = e.target.id.split('-')[2]
+        // console.log(buttonId)
+        const form = document.getElementById(`edit-form-${buttonId}`)
+        if (form.className==='hidden') {
+            form.classList.remove('hidden')
+        } else {
+            form.classList.add('hidden')
+        }
+        // textArea.id = `edit-box-${buttonId}`
+        // const answerCard = document.getElementById(`answer-card-${buttonId}`);
+        // const answerBody = answerCard.children[1]
+        // textArea.innerText = answerBody.innerText
+        // textArea.style = "color:red;font-weight:bold"
+        // const newSubmitButton = document.createElement('button');
+        // newSubmitButton.id = `submit-edit-button-${buttonId}`
+
+        // newSubmitButton.innerText = "Submit Edited Answer";
+        // newSubmitButton.style = "color:red", "font-weight:bold"
+        // const newForm = document.querySelector('.form-field')
+        // newForm.appendChild(newSubmitButton)
+        // let textArray = []
+        // textArea.addEventListener('input', async (e)=>{
+        //     textArray.push(e.data)
+        // })
+        const submitButtonHidden = document.getElementById(`edit-submit-${buttonId}`)
+        submitButtonHidden.addEventListener('click', async (e)=>{
             e.preventDefault();
-            e.stopPropagation();
-            const buttonId = e.target.id.split('-')[2]
-            textArea.id = `edit-box-${buttonId}`
-            const answerCard = document.getElementById(`answer-card-${buttonId}`);
-            const answerBody = answerCard.children[1]
-            textArea.innerText = answerBody.innerText
-            textArea.style = "color:red;font-weight:bold"
-            const newSubmitButton = document.createElement('button');
-            newSubmitButton.id = `submit-edit-button-${buttonId}`
-            newSubmitButton.innerText = "Submit Edited Answer";
-            newSubmitButton.style = "color:red", "font-weight:bold"
-            const newForm = document.querySelector('.form-field')
-            newForm.appendChild(newSubmitButton)
-            let textArray = []
-            textArea.addEventListener('input', async (e)=>{
-                textArray.push(e.data)
-            })
+            // e.stopPropagation();
+            // const content = textArray.join('')
+            const content = document.getElementById(`${buttonId}-edit-content`).value
 
-            newSubmitButton.addEventListener('click', async (e)=>{
-                e.preventDefault();
-                e.stopPropagation();
-                const content = textArray.join('')
-
-                const res = await fetch(`/answers/${buttonId}`, {
-                    method: "PUT",
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
+            const res = await fetch(`/answers/${buttonId}`, {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
                     content
                 })
-                })
-                const data = await res.json();
-                const newBody = document.getElementById(`answerBody-${buttonId}`)
-                newBody.innerText = data.updatedBody
-                newSubmitButton.remove();
-                const textArea = document.getElementById(`edit-box-${buttonId}`)
-                textArea.innerText = ' '
-                textArea.style = 'color:black;'
             })
+            // const answeredAt = document.getElementById(`answerDate-${buttonId}`)
+
+            const data = await res.json();
+            // console.log(data)
+            const newBody = document.getElementById(`answerBody-${buttonId}`)
+            newBody.innerHTML = data.updatedBody
+            // answeredAt.innerHTML = data.editedAt
+            form.classList.add('hidden')
+            // newSubmitButton.remove();
+            // const textArea = document.getElementById(`edit-box-${buttonId}`)
+            // textArea.innerText = ' '
+            // textArea.style = 'color:black;'
         })
-    })
+    }, )
+})
+
 
 
 })

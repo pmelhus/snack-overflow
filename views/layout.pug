@@ -1,8 +1,8 @@
 html
   head
     title= title
-    link(rel='favicon' href='snack-overfleaux.ico' type='image/x-icon')
-    link(rel='icon' href='snack-overfleaux.ico' type='image/x-icon')
+    link(rel='favicon' href='/snack-overfleaux.ico' type='image/x-icon')
+    link(rel='icon' href='/snack-overfleaux.ico' type='image/x-icon')
   block styles
     link(rel='stylesheet' href='/stylesheets/index.css')
 
@@ -11,11 +11,13 @@ html
     header
       nav(id='top-nav-bar')
         ul.top-bar-container
+
           div(id='logo')
             li: img(src='images/snack-overfleaux.png' alt='Snack Overfleaux logo' width='32' length='32')
             li: a(href='/')
               | Snack
               bold Overfleaux
+
           li: form#searchForm(action='/' role='search')
                 input#searchInput(type='search' name='term' placeholder='What are you craving?' required)
                 button Forage!

@@ -150,6 +150,12 @@ textarea {
 #a-form-card {
     width: 63.65%;
 }
+
 .vote-buttons p{
     margin: 3px
+}
+
+#errorMsgAnswer{
+    display: flex;
+    justify-content: start;
 }

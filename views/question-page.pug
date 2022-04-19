@@ -5,8 +5,10 @@ include utils.pug
 block styles
     script(src="/javascripts/questions.js" type="module" defer)
     script(src="/javascripts/answers.js" type="module" defer)
+    script(src="/javascripts/question-page.js" type="module" defer)
     link(rel="stylesheet" href="/stylesheets/question-page.css")
     link(rel='stylesheet' href='/stylesheets/index.css')
+
 
 
 block content
@@ -31,6 +33,7 @@ block content
         div(id="answer")
             each answer in answers
                 div(class='a-card' id=`answer-card-${answer.id}`)
+
                     p(id='answerDate') answered at #{answer.createdAt.toLocaleTimeString()} by #{answer.User.userName}
                     div(class='a-card-content')
                         div(class='vote-buttons')
@@ -38,6 +41,10 @@ block content
                             p #{answer.answerScore}
                             button(class='downvote'): a(href='/votes/down') Downvote Answer
                         p(id=`answerBody-${answer.id}`) #{answer.body}
+                          form(class='hidden' id=`edit-form-${answer.id}`)
+                            label Edit
+                            textarea(type="text" name="body" id=`${answer.id}-edit-content`) #{answer.body}
+                            button(class="edit-submit" id=`edit-submit-${answer.id}`) Submit Edit
                         if user && (user.id === answer.userId)
                         div(id='button-card')
                             button: a(id=`edit-a-${answer.id}`) Edit
@@ -51,4 +58,7 @@ block content
                 p Your Answer
                 form(action='')
                     +textarea('', 'body', body)
-                    button(id=`submit-answer`) New Answer
+                    if authorization
+                        button(id=`submit-answer`) New Answer
+                    else
+                        button(id=`submit-answer-noAuth` type='button') New Answer

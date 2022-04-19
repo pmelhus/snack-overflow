@@ -65,12 +65,15 @@ router.put("/instant/:id", asyncHandler(async (req, res) => {
 }))
 
 router.put("/:id", asyncHandler(async (req, res) => {
-
+  // let today = new Date()
+  // let time = today.toLocaleTimeString()
+  // let date = today.toLocaleDateString()
   const id = req.params.id
   const newBody = req.body.content
   const edit = await Answer.findByPk(id)
   const editedBody = await edit.update({body:newBody})
-  res.json({"updatedBody": `${editedBody.body}`})
+  res.json({"updatedBody": `${editedBody.body}`},
+)
 }))
 
 
